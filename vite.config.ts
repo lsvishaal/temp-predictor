@@ -19,5 +19,13 @@ export default defineConfig({
     },
     chunkSizeWarningLimit: 1000, // Increase the limit to 1000 kB
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://project-weather-n4ay.onrender.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  }
 })
-

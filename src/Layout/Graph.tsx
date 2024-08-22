@@ -2,6 +2,7 @@
 
 import { TrendingUp } from "lucide-react"
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
+import { useQuery, QueryClient, QueryClientProvider } from 'react-query'
 
 import {
   Card,
@@ -17,51 +18,45 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-const chartData = [
-    { month: "January", desktop: 186, mobile:55 },
-    { month: "February", desktop: 305 },
-    { month: "March", desktop: 237 },
-    { month: "April", desktop: 73 },
-    { month: "May", desktop: 209 },
-    { month: "June", desktop: 214 },
-    { month: "January", desktop: 186 },
-    { month: "February", desktop: 305 },
-    { month: "March", desktop: 237 },
-    { month: "April", desktop: 73 },
-    { month: "May", desktop: 209 },
-    { month: "June", desktop: 214 },
-    { month: "January", desktop: 186 },
-    { month: "February", desktop: 305 },
-    { month: "March", desktop: 237 },
-    { month: "April", desktop: 73 },
-    { month: "May", desktop: 209 },
-    { month: "June", desktop: 214 },
-    { month: "January", desktop: 186 },
-    { month: "February", desktop: 305 },
-    { month: "March", desktop: 237 },
-    { month: "April", desktop: 73 },
-    { month: "May", desktop: 209 },
-    { month: "June", desktop: 214 },{ month: "January", desktop: 186 },
-    { month: "February", desktop: 305 },
-    { month: "March", desktop: 237 },
-    { month: "April", desktop: 73 },
-    { month: "May", desktop: 209 },
-    { month: "June", desktop: 214 },
-]
+
+const queryClient = new QueryClient();
+
+const fetchTemperatureData = async () => {
+  const response = await fetch("/api/data/temp/linear");
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  return response.json();
+};
 
 const chartConfig = {
   desktop: {
-    label: "Desktop",
+    label: "Actual",
     color: "hsl(var(--chart-1))",
+  },
+  mobile: {
+    label: "Predicted",
+    color: "hsl(var(--chart-2))",
   },
 } satisfies ChartConfig
 
-export function Graph() {
+const GraphComponent = () => {
+  const { data, error, isLoading, isError } = useQuery('temperatureData', fetchTemperatureData);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <pre>{JSON.stringify(error)}</pre>;
+
+  const chartData = data?.temperature_linear.weather_model.map((entry) => ({
+    month: entry.Date,
+    desktop: entry.Actual,
+    mobile: entry.Prediction,
+  }));
+
   return (
     <Card className="m-3 py-10">
       <CardHeader>
-        <CardTitle>Line Chart</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Temperature - Linear Regression</CardTitle>
+        <CardDescription>January - December 2023</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -92,6 +87,13 @@ export function Graph() {
               strokeWidth={2}
               dot={false}
             />
+            <Line
+              dataKey="mobile"
+              type="natural"
+              stroke="var(--color-mobile)"
+              strokeWidth={2}
+              dot={false}
+            />
           </LineChart>
         </ChartContainer>
       </CardContent>
@@ -106,3 +108,11 @@ export function Graph() {
     </Card>
   )
 }
+
+const Graph = () => (
+  <QueryClientProvider client={queryClient}>
+    <GraphComponent />
+  </QueryClientProvider>
+);
+
+export { Graph };

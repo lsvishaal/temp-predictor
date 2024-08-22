@@ -16,9 +16,6 @@ const App = () => {
       <Graph />
       <Welcome/>
 
-
-
-
     </div>
     </ThemeProvider>
   )
