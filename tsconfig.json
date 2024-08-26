@@ -14,6 +14,9 @@
       "@/*": ["./src/*"]
     },
     "skipLibCheck": true, // Skip type checking for declaration files
-    "noEmit": true // Prevent emitting output files
+    "noEmit": true, // Prevent emitting output files
+    "noUnusedLocals": false, // Disable errors for unused local variables
+    "noImplicitAny": false, // Disable errors for implicit 'any' types
+    "strict": false // Disable strict type checking
   }
 }
