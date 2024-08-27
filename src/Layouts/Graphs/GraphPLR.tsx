@@ -15,6 +15,12 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 
+interface WeatherModelItem {
+  Date: string;
+  Actual: number;
+  Prediction: number;
+}
+
 const GraphPLR = () => {
   const [chartData, setChartData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,7 +29,7 @@ const GraphPLR = () => {
     fetch('/api/data/precip/linear')
       .then(response => response.json())
       .then(data => {
-        const formattedData = data.weather_model.map(item => ({
+        const formattedData = data.weather_model.map((item: WeatherModelItem) => ({
           month: item.Date,
           Actual: item.Actual,
           Prediction: item.Prediction,

@@ -22,11 +22,17 @@ const GraphPRF = () => {
   const [chartData, setChartData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  interface WeatherModelItem {
+    Date: string;
+    Actual: number;
+    Prediction: number;
+  }
+
   useEffect(() => {
     fetch('/api/data/precip/rf')
       .then(response => response.json())
       .then(data => {
-        const formattedData = data.precipitation_rf.weather_model.map(item => ({
+        const formattedData = data.precipitation_rf.weather_model.map((item: WeatherModelItem) => ({
           month: item.Date,
           Actual: item.Actual,
           Prediction: item.Prediction,

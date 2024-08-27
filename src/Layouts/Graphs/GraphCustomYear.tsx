@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import { useState, FormEvent, ChangeEvent } from 'react';
 import { CartesianGrid, Line, LineChart, XAxis } from 'recharts';
 import {
   Card,
@@ -16,17 +16,24 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 
+interface ChartData {
+  linear_temp: Array<{ Date: string; predicted_value: number }>;
+  linear_precip: Array<{ Date: string; predicted_value: number }>;
+  rf_temp: Array<{ Date: string; predicted_value: number }>;
+  rf_precip: Array<{ Date: string; predicted_value: number }>;
+}
+
 const GraphCustomYear = () => {
-  const [year, setYear] = useState('');
-  const [chartData, setChartData] = useState({
+  const [year, setYear] = useState<string>('');
+  const [chartData, setChartData] = useState<ChartData>({
     linear_temp: [],
     linear_precip: [],
     rf_temp: [],
     rf_precip: [],
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {
@@ -68,7 +75,7 @@ const GraphCustomYear = () => {
         <input
           type="text"
           value={year}
-          onChange={(e) => setYear(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setYear(e.target.value)}
           placeholder="Enter year"
           className="px-4 py-2 bg-black border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
@@ -80,7 +87,7 @@ const GraphCustomYear = () => {
         </button>
       </form>
 
-      {['linear_temp', 'linear_precip', 'rf_temp', 'rf_precip'].map((key) => (
+      {(['linear_temp', 'linear_precip', 'rf_temp', 'rf_precip'] as const).map((key) => (
         <div key={key} className="my-12 w-full max-w-4xl">
           <Card>
             <CardHeader>

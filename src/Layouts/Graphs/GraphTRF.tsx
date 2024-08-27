@@ -16,15 +16,21 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 
+interface WeatherModelItem {
+  Date: string;
+  Actual: number;
+  Prediction: number;
+}
+
 const GraphRF = () => {
-  const [chartData, setChartData] = useState([]);
+  const [chartData, setChartData] = useState<WeatherModelItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/api/data/temp/rf')
       .then(response => response.json())
       .then(data => {
-        const formattedData = data.temperature_rf.weather_model.map(item => ({
+        const formattedData = data.temperature_rf.weather_model.map((item: WeatherModelItem) => ({
           month: item.Date,
           Actual: item.Actual,
           Prediction: item.Prediction,
@@ -50,14 +56,15 @@ const GraphRF = () => {
   } satisfies ChartConfig;
 
   if (loading) {
-    return(
-    <div className="flex items-center justify-center min-h-screen">
+    return (
+      <div className="flex items-center justify-center min-h-screen">
         <div className="flex items-center justify-center space-x-2">
           <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin border-blue-500"></div>
           <div>Initiating Model</div>
         </div>
       </div>
-  )}
+    );
+  }
 
   return (
     <Card>

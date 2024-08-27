@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useQuery } from 'react-query';
 import { TrendingUp } from "lucide-react";
@@ -18,16 +18,11 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 
-const chartConfig = {
-  desktop: {
-    label: "Actual",
-    color: "hsl(var(--chart-4))",
-  },
-  mobile: {
-    label: "Prediction",
-    color: "hsl(var(--chart-5))",
-  },
-} satisfies ChartConfig;
+interface WeatherModelItem {
+  Date: string;
+  Actual: number;
+  Prediction: number;
+}
 
 const fetchTemperatureData = async () => {
   const response = await fetch('/api/data/temp/linear');
@@ -38,7 +33,7 @@ const fetchTemperatureData = async () => {
   console.log('Fetched data:', data); // Log the fetched data
 
   // Map the data to the format expected by the chart
-  return data.temperature_linear.weather_model.map(item => ({
+  return data.temperature_linear.weather_model.map((item: WeatherModelItem) => ({
     month: item.Date,
     desktop: item.Actual,
     mobile: item.Prediction,
@@ -57,7 +52,7 @@ const lineChartConfig = {
 } satisfies ChartConfig;
 
 export function GraphTLR() {
-  const { data, error, isLoading } = useQuery('temperatureData', fetchTemperatureData);
+  const { data, error, isLoading } = useQuery<WeatherModelItem[], Error>('temperatureData', fetchTemperatureData);
 
   if (isLoading) {
     return (
@@ -123,16 +118,15 @@ export function GraphTLR() {
         </ChartContainer>
       </CardContent>
       <CardFooter>
-      <div className="grid gap-2">
-            <div className="flex items-center gap-2 font-medium leading-none">
-              Accuracy: 98.98% <TrendingUp className="h-4 w-4" />
-            </div>
-            <div className="flex items-center gap-2 leading-none text-muted-foreground">
-              Showing temperature predictions for the last period
-            </div>
+        <div className="grid gap-2">
+          <div className="flex items-center gap-2 font-medium leading-none">
+            Accuracy: 98.98% <TrendingUp className="h-4 w-4" />
           </div>
+          <div className="flex items-center gap-2 leading-none text-muted-foreground">
+            Showing temperature predictions for the last period
+          </div>
+        </div>
       </CardFooter>
     </Card>
   );
 }
-

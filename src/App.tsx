@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "react-query";
-import { ContainerScroll, Header } from "./components/ui/container-scroll-animation";
-import { LampContainer, LampDemo } from "./components/ui/lamp";
+import { ContainerScroll} from "./components/ui/container-scroll-animation";
+import {LampDemo } from "./components/ui/lamp";
 import { ThemeProvider } from "./components/ui/theme-provider";
 import Footer from "./Layouts/Footer";
 import { Hero } from "./Layouts/Hero";
