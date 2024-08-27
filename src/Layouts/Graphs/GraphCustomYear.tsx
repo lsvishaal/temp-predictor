@@ -66,7 +66,12 @@ const GraphCustomYear = () => {
   } satisfies ChartConfig;
 
   if (loading) {
-    return <div>Initiating Model</div>;
+    return <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center space-x-2">
+      <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin border-blue-500"></div>
+      <div>Model Initiating</div>
+    </div>
+  </div>;
   }
 
   return (
@@ -77,14 +82,15 @@ const GraphCustomYear = () => {
           value={year}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setYear(e.target.value)}
           placeholder="Enter year"
-          className="px-4 py-2 bg-black border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="mt-20 px-2 py-2 bg-black border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-        <button
-          type="submit"
-          className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          Submit
+        
+        <button className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+          Generate
         </button>
+  
+        
+      
       </form>
 
       {(['linear_temp', 'linear_precip', 'rf_temp', 'rf_precip'] as const).map((key) => (
