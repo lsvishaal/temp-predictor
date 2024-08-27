@@ -4,12 +4,13 @@ import {LampDemo } from "./components/ui/lamp";
 import { ThemeProvider } from "./components/ui/theme-provider";
 import Footer from "./Layouts/Footer";
 import { Hero } from "./Layouts/Hero";
-
+import { useInView } from 'react-intersection-observer';
 import GraphRF  from "./Layouts/Graphs/GraphTRF";
 import GraphPLR from "./Layouts/Graphs/GraphPLR";
 import { GraphTLR } from "./Layouts/Graphs/GraphTLR";
 import GraphPRF from "./Layouts/Graphs/GraphPRF";
 import GraphCustomYear from "./Layouts/Graphs/GraphCustomYear";
+import { ReactNode } from "react";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -31,6 +32,21 @@ const queryClient = new QueryClient();
 //     content: <div>Additional content for section 3</div>,
 //   },
 // ];
+interface LazyComponentProps {
+  children: ReactNode;
+}
+const LazyComponent: React.FC<LazyComponentProps> = ({ children }) => {
+  const { ref, inView } = useInView({
+    triggerOnce: true, // Load only once
+    threshold: 0.1, // Trigger when 10% of the component is in view
+  });
+
+  return (
+    <div ref={ref}>
+      {inView ? children : null}
+    </div>
+  );
+};
 
 function App() {
   return (
@@ -38,19 +54,23 @@ function App() {
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <LampDemo />
           <Hero />
-          
+          <LazyComponent>
           <ContainerScroll titleComponent={<div>
             <h1 className="text-5xl font-bold text-center scroll-smooth"><span className="text-red-400">Temperature</span> in <span className="text-blue-400">Linear Regression</span></h1>
           </div>} children={<GraphTLR />}>
           
           </ContainerScroll>
-          <GraphTLR />
-          <GraphRF />
-          <GraphPLR />
-          <GraphPRF />
-          <GraphCustomYear />
+          
+          <LazyComponent><GraphTLR /></LazyComponent>
+          
 
+          <LazyComponent> <GraphRF /> </LazyComponent>
+          <LazyComponent><GraphPLR /></LazyComponent>
+          <LazyComponent><GraphPRF /></LazyComponent>
+          
+          <LazyComponent><GraphCustomYear /></LazyComponent>
 
+          </LazyComponent>
           {/* <StickyScroll content={placeholderContent} /> */}
           <Footer />
           

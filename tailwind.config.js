@@ -1,5 +1,6 @@
 import tailwindcssAnimate from "tailwindcss-animate";
-
+const plugin = require('tailwindcss/plugin');
+const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default;
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -81,7 +82,19 @@ module.exports = {
       },
     },
   },
-  plugins:  [tailwindcssAnimate],
+  plugins:  [
+    tailwindcssAnimate,
+    plugin(function({ addBase, theme }) {
+      let allColors = flattenColorPalette(theme("colors"));
+      let newVars = Object.fromEntries(
+        Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+      );
+
+      addBase({
+        ":root": newVars,
+      });
+    }),
+  ],
 }
 
 // This plugin adds each Tailwind color as a global CSS variable, e.g. var(--gray-200).
