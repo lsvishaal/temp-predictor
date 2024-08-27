@@ -27,7 +27,7 @@ const GraphRF = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/data/temp/rf')
+    fetch(`${import.meta.env.VITE_API_URL}/api/data/temp/rf`)
       .then(response => response.json())
       .then(data => {
         const formattedData = data.temperature_rf.weather_model.map((item: WeatherModelItem) => ({

@@ -60,13 +60,15 @@ function App() {
           </div>} children={<GraphTLR />}>
           
           </ContainerScroll>
-          
-          <LazyComponent><GraphTLR /></LazyComponent>
-          
 
+          <div className="mx-5 grid grid-flow-row mb-20">
+
+          <LazyComponent><GraphTLR /></LazyComponent>
           <LazyComponent> <GraphRF /> </LazyComponent>
           <LazyComponent><GraphPLR /></LazyComponent>
           <LazyComponent><GraphPRF /></LazyComponent>
+
+          </div>
           
           <LazyComponent><GraphCustomYear /></LazyComponent>
 

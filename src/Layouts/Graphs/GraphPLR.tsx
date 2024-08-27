@@ -26,7 +26,7 @@ const GraphPLR = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/data/precip/linear')
+    fetch(`${import.meta.env.VITE_API_URL}/api/data/precip/linear`)
       .then(response => response.json())
       .then(data => {
         const formattedData = data.weather_model.map((item: WeatherModelItem) => ({

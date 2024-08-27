@@ -77,24 +77,21 @@ const GraphCustomYear = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <form onSubmit={handleSubmit} className="mb-8">
-        <h1 className='mt-5 flex text-center text-4xl tracking-wider font-bold text-violet-500'>
-          <span className='font-bold text-5xl text-yellow-400'> Test </span> 
-          <span className='font-bold text-5xl text-purple-500'> The Model Dynamically!</span>
+        <h1 className='mt-5 flex text-center text-5xl tracking-wider font-bold bg-gradient-to-r from-blue-600 via-green-500 to-purple-400 text-transparent bg-clip-text'>
+           Test the Model
         </h1>
         <input
           type="text"
           value={year}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setYear(e.target.value)}
-          placeholder="Enter year"
+          placeholder="Enter the year"
           className="mt-10 px-2 py-2 bg-black border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
         
         <button className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 ml-5 font-bold text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-          Generate
+          Generate Predictions
         </button>
-  
-        
-      
+
       </form>
 
       {(['linear_temp', 'linear_precip', 'rf_temp', 'rf_precip'] as const).map((key) => (

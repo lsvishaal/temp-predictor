@@ -29,7 +29,7 @@ const GraphPRF = () => {
   }
 
   useEffect(() => {
-    fetch('/api/data/precip/rf')
+    fetch(`${import.meta.env.VITE_API_URL}/api/data/precip/rf`)
       .then(response => response.json())
       .then(data => {
         const formattedData = data.precipitation_rf.weather_model.map((item: WeatherModelItem) => ({
