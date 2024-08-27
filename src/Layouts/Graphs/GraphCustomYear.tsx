@@ -77,15 +77,19 @@ const GraphCustomYear = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <form onSubmit={handleSubmit} className="mb-8">
+        <h1 className='mt-5 flex text-center text-4xl tracking-wider font-bold text-violet-500'>
+          <span className='font-bold text-5xl text-yellow-400'> Test </span> 
+          <span className='font-bold text-5xl text-red-500'> The Model Dynamically!</span>
+        </h1>
         <input
           type="text"
           value={year}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setYear(e.target.value)}
           placeholder="Enter year"
-          className="mt-20 px-2 py-2 bg-black border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="mt-10 px-2 py-2 bg-black border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         
-        <button className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+        <button className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 ml-5 font-bold text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
           Generate
         </button>
   
@@ -94,7 +98,7 @@ const GraphCustomYear = () => {
       </form>
 
       {(['linear_temp', 'linear_precip', 'rf_temp', 'rf_precip'] as const).map((key) => (
-        <div key={key} className="my-12 w-full max-w-4xl">
+        <div key={key} className="my-12 w-full max-w-7xl">
           <Card>
             <CardHeader>
               <CardTitle>{key.replace('_', ' ').toUpperCase()}</CardTitle>
