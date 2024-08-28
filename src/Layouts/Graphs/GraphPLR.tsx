@@ -26,7 +26,7 @@ const GraphPLR = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`/api/data/precip/linear`)
+    fetch(`https://project-weather-n4ay.onrender.com/data/precip/linear`)
       .then(response => response.json())
       .then(data => {
         const formattedData = data.weather_model.map((item: WeatherModelItem) => ({
