@@ -27,7 +27,7 @@ const GraphRF = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/data/temp/rf`)
+    fetch(`https://project-weather-n4ay.onrender.com/data/temp/rf`)
       .then(response => response.json())
       .then(data => {
         const formattedData = data.temperature_rf.weather_model.map((item: WeatherModelItem) => ({

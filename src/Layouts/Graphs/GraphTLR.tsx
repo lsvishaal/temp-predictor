@@ -25,7 +25,7 @@ interface WeatherModelItem {
 }
 
 const fetchTemperatureData = async () => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/api/data/temp/linear`);
+  const response = await fetch("https://project-weather-n4ay.onrender.com/data/temp/linear");
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }

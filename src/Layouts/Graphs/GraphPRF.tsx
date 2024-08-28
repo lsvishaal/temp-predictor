@@ -28,8 +28,9 @@ const GraphPRF = () => {
     Prediction: number;
   }
 
+  //  /api/precip?mode=rf 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/api/data/precip/rf`)
+    fetch("https://project-weather-n4ay.onrender.com/data/precip/rf")
       .then(response => response.json())
       .then(data => {
         const formattedData = data.precipitation_rf.weather_model.map((item: WeatherModelItem) => ({
