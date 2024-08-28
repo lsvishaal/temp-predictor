@@ -37,7 +37,7 @@ const GraphCustomYear = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await fetch('/api/submit-year/', {
+      const response = await fetch('https://project-weather-n4ay.onrender.com/submit-year/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
