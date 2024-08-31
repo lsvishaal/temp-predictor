@@ -1,9 +1,3 @@
-/**
- * Note: Use position fixed according to your needs
- * Desktop navbar is better positioned at the bottom
- * Mobile navbar is better positioned at bottom right.
- **/
-
 import { cn } from "@/lib/utils";
 import { IconLayoutNavbarCollapse } from "@tabler/icons-react";
 import {
@@ -14,22 +8,30 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
+
+interface DockItem {
+  title: string;
+  icon: React.ReactNode;
+  component: React.ReactNode;
+}
 
 export const FloatingDock = ({
   items,
   desktopClassName,
   mobileClassName,
+  onItemClick,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string }[];
+  items: DockItem[];
   desktopClassName?: string;
   mobileClassName?: string;
+  onItemClick: (component: React.ReactNode) => void;
+  
 }) => {
   return (
     <>
-      <FloatingDockDesktop items={items} className={desktopClassName} />
-      <FloatingDockMobile items={items} className={mobileClassName} />
+      <FloatingDockDesktop items={items} className={desktopClassName} onItemClick={onItemClick} />
+      <FloatingDockMobile items={items} className={mobileClassName} onItemClick={onItemClick} />
     </>
   );
 };
@@ -37,9 +39,11 @@ export const FloatingDock = ({
 const FloatingDockMobile = ({
   items,
   className,
+  onItemClick,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string }[];
+  items: DockItem[];
   className?: string;
+  onItemClick: (component: React.ReactNode) => void;
 }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -67,13 +71,12 @@ const FloatingDockMobile = ({
                 }}
                 transition={{ delay: (items.length - 1 - idx) * 0.05 }}
               >
-                <Link
-                  to={item.href}
-                  key={item.title}
+                <button
+                  onClick={() => onItemClick(item.component)}
                   className="h-10 w-10 rounded-full bg-gray-50 dark:bg-neutral-900 flex items-center justify-center"
                 >
                   <div className="h-4 w-4">{item.icon}</div>
-                </Link>
+                </button>
               </motion.div>
             ))}
           </motion.div>
@@ -92,9 +95,11 @@ const FloatingDockMobile = ({
 const FloatingDockDesktop = ({
   items,
   className,
+  onItemClick,
 }: {
-  items: { title: string; icon: React.ReactNode; href: string }[];
+  items: DockItem[];
   className?: string;
+  onItemClick: (component: React.ReactNode) => void;
 }) => {
   const mouseX = useMotionValue(Infinity);
   return (
@@ -102,12 +107,12 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto hidden md:flex h-16 gap-4 items-end  rounded-2xl bg-gray-50 dark:bg-slate-900 px-4 pb-3",
+        "mx-auto hidden md:flex h-16 gap-4 items-end rounded-2xl bg-gray-50 dark:bg-slate-900 px-4 pb-3",
         className
       )}
     >
       {items.map((item) => (
-        <IconContainer mouseX={mouseX} key={item.title} {...item} />
+        <IconContainer mouseX={mouseX} key={item.title} {...item} onItemClick={onItemClick} />
       ))}
     </motion.div>
   );
@@ -117,12 +122,14 @@ function IconContainer({
   mouseX,
   title,
   icon,
-  href,
+  component,
+  onItemClick,
 }: {
   mouseX: MotionValue;
   title: string;
   icon: React.ReactNode;
-  href: string;
+  component: React.ReactNode;
+  onItemClick: (component: React.ReactNode) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -167,7 +174,7 @@ function IconContainer({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <Link to={href}>
+    <button onClick={() => onItemClick(component)}>
       <motion.div
         ref={ref}
         style={{ width, height }}
@@ -194,6 +201,6 @@ function IconContainer({
           {icon}
         </motion.div>
       </motion.div>
-    </Link>
+    </button>
   );
 }
