@@ -11,8 +11,14 @@ import { GraphTLR } from "./Layouts/Graphs/GraphTLR";
 import GraphPRF from "./Layouts/Graphs/GraphPRF";
 import GraphCustomYear from "./Layouts/Graphs/GraphCustomYear";
 import { ReactNode } from "react";
+import { FloatingDock } from "./components/ui/floating-dock";
 
 // Create a client
+const dockItems = [
+  { title: 'Home', icon: "", href: '/' },
+  { title: 'About', icon: "", href: '/about' },
+  { title: 'Contact', icon: "", href: '/contact' },
+];
 const queryClient = new QueryClient();
 // const placeholderContent = [
 //   {
@@ -53,6 +59,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <LampDemo />
+          <FloatingDock items={dockItems} />
           <Hero />
           <LazyComponent>
           <ContainerScroll titleComponent={<div>
