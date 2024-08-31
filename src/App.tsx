@@ -12,12 +12,14 @@ import GraphPRF from "./Layouts/Graphs/GraphPRF";
 import GraphCustomYear from "./Layouts/Graphs/GraphCustomYear";
 import { ReactNode } from "react";
 import { FloatingDock } from "./components/ui/floating-dock";
+import { BrowserRouter } from "react-router-dom";
 
 // Create a client
 const dockItems = [
-  { title: 'Home', icon: "", href: '/' },
-  { title: 'About', icon: "", href: '/about' },
-  { title: 'Contact', icon: "", href: '/contact' },
+  { title: 'TLR', icon: "", href: '/' },
+  { title: 'PLR', icon: "", href: '/about' },
+  { title: 'TRF', icon: "", href: '/contact' },
+  { title: 'PRF', icon: "", href: '/contact' },
 ];
 const queryClient = new QueryClient();
 // const placeholderContent = [
@@ -56,10 +58,13 @@ const LazyComponent: React.FC<LazyComponentProps> = ({ children }) => {
 
 function App() {
   return (
+    <BrowserRouter>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <LampDemo />
+          <div className="flex justify-center items-center ">
           <FloatingDock items={dockItems} />
+          </div>
           <Hero />
           <LazyComponent>
           <ContainerScroll titleComponent={<div>
@@ -86,6 +91,7 @@ function App() {
 
       </ThemeProvider>
     </QueryClientProvider>
+    </BrowserRouter>
   );
 }
 
