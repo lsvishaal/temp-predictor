@@ -51,7 +51,7 @@ const lineChartConfig = {
   },
 } satisfies ChartConfig;
 
-export function GraphTLR() {
+export default function GraphTLR() {
   const { data, error, isLoading } = useQuery<WeatherModelItem[], Error>('temperatureData', fetchTemperatureData);
 
   if (isLoading) {

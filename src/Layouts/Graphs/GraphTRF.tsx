@@ -22,7 +22,7 @@ interface WeatherModelItem {
   Prediction: number;
 }
 
-const GraphRF = () => {
+const GraphTRF = () => {
   const [chartData, setChartData] = useState<WeatherModelItem[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -124,4 +124,4 @@ const GraphRF = () => {
   );
 };
 
-export default GraphRF;
+export default GraphTRF;

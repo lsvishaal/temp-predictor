@@ -5,7 +5,7 @@ import { cn } from "../../lib/utils";
 import { FlipWords } from "./flip-words";
 
 export function LampDemo() {
-  const words1 = ["Analaysis Of", "Temperature", "Precipitation", "Random Forest"];
+  const words1 = [ "Temperature", "Precipitation", "Random Forest"];
 
   return (
     <LampContainer>
@@ -17,9 +17,9 @@ export function LampDemo() {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-5xl sm:text-6xl md:text-7xl lg:text-9xl tracking-wider font-medium text-transparent"
+        className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-5xl sm:text-6xl md:text-7xl lg:text-7xl tracking-wider font-medium text-transparent"
       >
-        We Predict <br /> 
+        We Predict The<br />Analaysis Of <br/> 
         <FlipWords words={words1} duration={2000} className="text-center text-purple-400 font-thin tracking-wider text-xl sm:text-2xl md:text-3xl lg:text-4xl" /> 
         <br />
       </motion.h1>

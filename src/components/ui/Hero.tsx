@@ -21,11 +21,11 @@ export const Hero = () => (
           </div>
           <div className="flex gap-2 flex-col">
             <h2 className="text-lg sm:text-xl md:text-3xl lg:text-5xl lg:max-w-xl font-regular text-left">
-              Abracada Dabra
+              
               <ModeToggle />
             </h2>
             <p className="text-base sm:text-lg max-w-xl lg:max-w-sm leading-relaxed tracking-tight text-muted-foreground text-left">
-            Indeed, something related to abracadabra
+            Try clicking this toggle button to change the theme!
             </p>
           </div>
         </div>
