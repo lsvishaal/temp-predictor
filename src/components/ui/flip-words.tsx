@@ -1,6 +1,7 @@
 "use client";
 import  { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, LayoutGroup } from "framer-motion";
+import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
 import { cn } from "@/lib/utils";
 
 export const FlipWords = ({
@@ -58,7 +59,7 @@ export const FlipWords = ({
           position: "absolute",
         }}
         className={cn(
-          "z-10 inline-block relative text-left text-neutral-900 dark:text-neutral-100 px-2",
+          "z-10 inline-block relative text-left px-2", // Removed default text color
           className
         )}
         key={currentWord}

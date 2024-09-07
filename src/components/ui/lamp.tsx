@@ -5,7 +5,7 @@ import { cn } from "../../lib/utils";
 import { FlipWords } from "./flip-words";
 
 export function LampDemo() {
-  const words1 = [ "Temperature", "Precipitation", "Random Forest"];
+  const words1 = [ "Temperature", "Precipitation"];
 
   return (
     <LampContainer>

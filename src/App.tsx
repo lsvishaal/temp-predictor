@@ -17,9 +17,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 
 
-
-
-
 interface LazyComponentProps {
   children: ReactNode;
 }
@@ -43,6 +40,7 @@ function App() {
 
 
   return (
+    <div className="selection:bg-pink-300 bg-slate-950">
     <Router>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
@@ -61,6 +59,7 @@ function App() {
         </ThemeProvider>
       </QueryClientProvider>
     </Router>
+    </div>
   );
 }
 
