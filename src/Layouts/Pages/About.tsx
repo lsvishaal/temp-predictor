@@ -8,7 +8,8 @@ import GraphPRF from "../Graphs/GraphPRF";
 import TLRDesc from "../TextParagraphs/TLRDesc";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { Badge } from "@/components/ui/badge";
-import { TypewriterEffectSmooth } from "@/components/ui/typewriter-effect";
+import { FlipWords } from "@/components/ui/flip-words";
+
 
 const About: React.FC = () => {
   interface LazyComponentProps {
@@ -24,11 +25,11 @@ const About: React.FC = () => {
     return <div ref={ref}>{inView ? children : null}</div>;
   };
     const wordsalpha = [
-    { text: "Random Forest" },
-    { text: "Linear Regression" },
-    { text: "Error Percentage" },
-    { text: "Performance Metrics" },
-    { text: "Comparison of Performance" },
+     "Random Forest",
+     "Linear Regression",
+     "Error Percentage",
+     "Performance Metrics",
+     "Comparison of Performance"
   ];
 
   return (
@@ -40,7 +41,7 @@ const About: React.FC = () => {
             <span className="text-violet-400">Let's Analyze</span>{" "}
             <span className="text-red-400">
               
-              <TypewriterEffectSmooth
+              <FlipWords
                 words={wordsalpha}
                 className="text-center font-bold tracking-wider text-xl sm:text-2xl md:text-3xl lg:text-5xl"
               />
