@@ -3,7 +3,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "../../lib/utils";
 import { FlipWords } from "./flip-words";
-import GraphCustomYear from "@/Layouts/Graphs/GraphCustomYear";
 
 export function LampDemo() {
   const words1 = [ "TEMPERATURE", "PRECIPITATION"];
@@ -19,10 +18,10 @@ export function LampDemo() {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-5xl sm:text-6xl md:text-7xl lg:text-5xl tracking-wider font-medium text-transparent"
+        className="mt-1 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-5xl sm:text-6xl md:text-7xl lg:text-7xl tracking-wider font-medium text-transparent"
       >
         Predict. Visualize.<br/>
-        <FlipWords words={words1} duration={2000} className="text-center text-purple-400 font-thin tracking-wider text-xl sm:text-xl md:text-xl lg:text-2xl" /> 
+        <FlipWords words={words1} duration={2000} className="text-center text-purple-400 font-thin tracking-wider text-xl sm:text-xl md:text-xl lg:text-3xl" /> 
         <br />
       </motion.h1>
     </LampContainer>

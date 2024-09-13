@@ -1,19 +1,12 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactNode } from "react";
-
 import { LampDemo } from "./components/ui/lamp";
 import { ThemeProvider } from "./components/ui/theme-provider";
 import Footer from "@/components/ui/Footer";
-import { Hero } from "@/components/ui/Hero";
 import { FloatingNav } from "./components/ui/floating-navbar";
-
 import About from './Layouts/Pages/About'; 
 import GraphCustomYear from "./Layouts/Graphs/GraphCustomYear";
-
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
-
 import { useInView } from 'react-intersection-observer';
 
 
@@ -40,11 +33,11 @@ function App() {
 
 
   return (
-    <div className="selection:bg-pink-300 bg-slate-950">
+    <div className="selection:bg-violet-500 selection:text-violet-950 bg-slate-950">
     <Router>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          <FloatingNav navItems={[{name: 'Home', link: '/'}, {name: 'About', link: '/about'}, {name: 'Contact', link: '/contact'}]} />
+          <FloatingNav navItems={[{name: "Root", link: '/'}, {name: 'Breakdown', link: '/about'}]} />
           
           <Routes>
             <Route path="/" element={<>
