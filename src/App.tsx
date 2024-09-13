@@ -49,7 +49,7 @@ function App() {
           <Routes>
             <Route path="/" element={<>
               <LampDemo />
-              <Hero />
+              {/* <Hero /> */}
               <LazyComponent><GraphCustomYear /></LazyComponent>
             </>} />
             <Route path="/about" element={<About />} />
