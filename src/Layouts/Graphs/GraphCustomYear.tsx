@@ -79,24 +79,24 @@ const GraphCustomYear = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center mb-40 mt-5">
+    <div className="flex flex-col items-center justify-center mb-96">
       <form onSubmit={handleSubmit} className="mb-1">
         <h1 className=' flex text-center text-5xl tracking-wider font-bold bg-gradient-to-r from-blue-600 via-green-500 to-purple-400 text-transparent bg-clip-text'>
         </h1>
         <input
-  type="text"
-  value={year}
-  onChange={(e: ChangeEvent<HTMLInputElement>) => setYear(e.target.value)}
-  placeholder="Year"
-  className="mt-10 px-2 py-2 dark:bg-black dark:text-purple-600 light:bg-white light:text-red-400 text-center text-slate-950 font-bold border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder:text-gray-700"
-/>
+          type="text"
+          value={year}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setYear(e.target.value)}
+          placeholder="Year"
+          className="mt-10 px-2 py-2 dark:bg-black dark:text-purple-600 light:bg-white light:text-red-400 text-center text-slate-950 font-bold border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder:text-gray-700"
+        />
         <button className="inline-flex h-11 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 ml-5 font-bold text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
           Go! 
         </button>
       </form>
 
       {predictionsGenerated && (
-        (['linear_temperature', 'linear_precip', 'rf_temp', 'rf_precip'] as const).map((key) => (
+        (['linear_temp', 'linear_precip', 'rf_temp', 'rf_precip'] as const).map((key) => (
           <div key={key} className="my-1 w-full max-w-7xl">
             <Card>
               <CardHeader>

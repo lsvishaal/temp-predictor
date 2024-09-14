@@ -13,6 +13,7 @@ const PRFDesc = () => {
         for predicting temperature trends due to its ability to model linear
         relationships effectively.
       </p>
+      
     </div>
   );
 };

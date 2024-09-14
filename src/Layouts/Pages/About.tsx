@@ -40,39 +40,39 @@ const About: React.FC = () => {
       <LazyComponent>
         {/* Hero Section */}
         <BackgroundBeamsWithCollision>
-          <h1 className="text-5xl font-bold text-center bg-gradient-to-r from-blue-400 to-red-50 bg-clip-text text-transparent">
-            <span className="text-violet-400">Let's Analyze</span>{" "}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center bg-gradient-to-r from-blue-400 to-red-50 bg-clip-text text-transparent">
+          <span className="text-violet-400">Let's Analyze</span>{" "}
             <span className="text-red-400">
               <FlipWords
                 words={wordsalpha}
-                className="text-center font-bold tracking-wider text-xl sm:text-2xl md:text-3xl lg:text-5xl"
+              className="text-center font-bold tracking-wider text-xl sm:text-2xl md:text-3xl lg:text-5xl"
               />
             </span>
           </h1>
         </BackgroundBeamsWithCollision>
 
         {/* Double Card Scroll */}
-        <div className="grid grid-cols-2">
-          <ContainerScroll
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <ContainerScroll
             titleComponent={
               <div>
-                <h1 className="text-5xl font-bold text-center scroll-smooth">
-                  <span className="text-blue-400">Linear Regression</span>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center scroll-smooth">
+        <span className="text-blue-400">Linear Regression</span>
                 </h1>
               </div>
             }
             children={
-              <div className="pb-32">
-                <div className="mb-16 mt-10 text-3xl font-normal text-justify-center">
-                  <p>
+              <div className="pb-10 sm:pb-32">
+        <div className="mb-10 sm:mb-16 mt-10 text-xl sm:text-3xl font-normal text-justify-center">
+        <p>
                     Linear Regression is a method that{" "}
                     <span className="text-blue-400 font-extrabold">
                       finds the best-fitting line
                     </span>{" "}
                     to model the relationship between a dependent variable and
                     one or more independent variables.
-                    <p className="mt-20">
-                      {" "}
+                    <p className="mt-10 sm:mt-20">
+                    {" "}
                       This method aims to{" "}
                       <span className="text-blue-400 font-extrabold">
                         minimize the difference
