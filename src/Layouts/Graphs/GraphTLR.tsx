@@ -74,15 +74,15 @@ export default function GraphTLR() {
   }
 
   return (
-    <Card>
+    <Card className="p-4 sm:p-6 md:p-8 lg:p-10">
       <CardHeader>
-        <CardTitle>Line Chart - Linear Regression</CardTitle>
-        <CardDescription>
+        <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl">Line Chart - Linear Regression</CardTitle>
+        <CardDescription className="text-sm sm:text-base md:text-lg lg:text-xl">
           Showing temperature predictions using Linear Regression model
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={lineChartConfig}>
+        <ChartContainer config={lineChartConfig} className="w-full h-64 sm:h-80 md:h-96 lg:h-[30rem]">
           <LineChart
             accessibilityLayer
             data={data}
@@ -90,6 +90,7 @@ export default function GraphTLR() {
               left: 12,
               right: 12,
             }}
+            className="w-full h-full"
           >
             <CartesianGrid vertical={false} />
             <XAxis
@@ -117,7 +118,7 @@ export default function GraphTLR() {
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="text-sm sm:text-base md:text-lg lg:text-xl">
         <div className="grid gap-2">
           <div className="flex items-center gap-2 font-medium leading-none">
             Accuracy: 98.98% <TrendingUp className="h-4 w-4" />

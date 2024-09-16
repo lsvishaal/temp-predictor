@@ -63,7 +63,7 @@ const GraphCustomYear = () => {
   const chartConfig = {
     predicted_value: {
       label: 'Predicted Value',
-      color: 'hsl(var(--chart-1))',
+      color: 'hsl(var(--chart-3))',
     },
   } satisfies ChartConfig;
 
@@ -88,7 +88,7 @@ const GraphCustomYear = () => {
           value={year}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setYear(e.target.value)}
           placeholder="Year"
-          className="mt-10 px-2 py-2 dark:bg-black dark:text-purple-600 light:bg-white light:text-red-400 text-center text-slate-950 font-bold border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder:text-gray-700"
+          className="mt-10 px-2 py-2 mb-10 dark:bg-black dark:text-purple-600 light:bg-white light:text-red-400 text-center text-slate-950 font-bold border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500 placeholder:text-gray-700"
         />
         <button className="inline-flex h-11 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 ml-5 font-bold text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
           Go! 
@@ -97,7 +97,7 @@ const GraphCustomYear = () => {
 
       {predictionsGenerated && (
         (['linear_temp', 'linear_precip', 'rf_temp', 'rf_precip'] as const).map((key) => (
-          <div key={key} className="my-1 w-full max-w-7xl">
+          <div key={key} className="my-6 w-full max-w-7xl">
             <Card>
               <CardHeader>
                 <CardTitle>{key.replace('_', ' ').toUpperCase()}</CardTitle>

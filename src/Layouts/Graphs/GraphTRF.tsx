@@ -67,13 +67,15 @@ const GraphTRF = () => {
   }
 
   return (
-    <Card>
+    <Card className="p-4 sm:p-6 md:p-8 lg:p-10">
       <CardHeader>
-        <CardTitle>Line Chart - Temperature RF</CardTitle>
-        <CardDescription>Temperature Predictions</CardDescription>
+        <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl">Line Chart - Temperature RF</CardTitle>
+        <CardDescription className="text-sm sm:text-base md:text-lg lg:text-xl">
+          Temperature Predictions
+        </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={chartConfig}>
+        <ChartContainer config={chartConfig} className="w-full h-64 sm:h-80 md:h-96 lg:h-[30rem]">
           <LineChart
             accessibilityLayer
             data={chartData}
@@ -81,6 +83,7 @@ const GraphTRF = () => {
               left: 12,
               right: 12,
             }}
+            className="w-full h-full"
           >
             <CartesianGrid vertical={false} />
             <XAxis
@@ -108,8 +111,8 @@ const GraphTRF = () => {
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter>
-        <div className="flex w-full items-start gap-2 text-sm">
+      <CardFooter className="text-sm sm:text-base md:text-lg lg:text-xl">
+        <div className="flex w-full items-start gap-2">
           <div className="grid gap-2">
             <div className="flex items-center gap-2 font-medium leading-none">
               Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
