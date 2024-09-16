@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   Table,
   TableHeader,
@@ -14,15 +14,14 @@ interface PerformanceMeasures {
   r2_score: number;
 }
 
-interface TemperatureRandomForest {
+interface TemperatureRF {
   variance: number;
-  Performance_measures: PerformanceMeasures;
+  Performance_measures?: PerformanceMeasures; // Make this optional to handle undefined case
 }
 
 const TRFDesc = () => {
-  const [data, setData] = useState<TemperatureRandomForest | null>(null);
+  const [data, setData] = useState<TemperatureRF | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const controls = useAnimation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +31,9 @@ const TRFDesc = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const result = await response.json();
-        console.log('Fetched data:', result); // Debugging log
+        console.log('Fetched data:', result); // Log the fetched data
+
+        // Handle the data
         setData(result.temperature_rf);
       } catch (err) {
         if (err instanceof Error) {
@@ -45,43 +46,34 @@ const TRFDesc = () => {
       }
     };
     fetchData();
-
-    // Trigger staggered animations
-    controls.start(i => ({
-      opacity: 1,
-      y: 0,
-      transition: { delay: i * 0.5 },
-    }));
-  }, [controls]);
+  }, []);
 
   return (
     <div className="my-24 mx-4 sm:my-32 sm:mx-8 md:my-48 md:mx-16 lg:my-64 lg:mx-24">
       <motion.h1
-        className="text-3xl sm:text-4xl md:text-5xl font-bold text-center"
-        initial={{ opacity: 0, y: 20 }}
-        animate={controls}
-        custom={0}
+        className="text-3xl sm:text-4xl md:text-5xl text-red-400 font-bold text-center"
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
       >
-        <span className='text-green-400'>Random Forest</span> for <span className='text-red-400'>Temperature</span>
+        Random Forest  for Temperature
       </motion.h1>
 
       <motion.div
         className="text-lg sm:text-xl md:text-2xl mt-8 sm:mt-10 md:mt-12 text-justify mx-4 sm:mx-8 md:mx-16 lg:mx-48"
-        initial={{ opacity: 0, y: 20 }}
-        animate={controls}
-        custom={1}
+        initial={{ opacity: 0, scale: 0.8 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.4, duration: 0.5 }}
       >
-        Since <span className="font-bold text-red-400">temperature</span> typically exhibits{" "}
-        <span className="font-bold text-red-400">less variance</span>,{" "}
-        <span className="font-bold text-green-400">Random Forest </span>is more suitable for predicting precipitation trends due to its ability to <span className="font-bold text-green-400"> model complex relationships effectively.</span>
+        Since temperature typically exhibits less variance, Random Forest is more suitable for predicting temperature trends due to its ability to 
       </motion.div>
 
       {error && (
         <motion.div
           className="mt-8 text-red-500"
-          initial={{ opacity: 0, y: 20 }}
-          animate={controls}
-          custom={2}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.6, duration: 0.5 }}
         >
           <span>Error fetching data: {error}</span>
         </motion.div>
@@ -90,9 +82,9 @@ const TRFDesc = () => {
       {data && (
         <motion.div
           className="mt-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={controls}
-          custom={3}
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.8, duration: 0.5 }}
         >
           <Table>
             <TableHeader>

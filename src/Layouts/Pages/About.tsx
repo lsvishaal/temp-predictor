@@ -121,14 +121,14 @@ const About: React.FC = () => {
 
       {/* Graph & Desc Section */}
       <div className="mx-20 grid grid-flow-row mb-20 relative ">
-        
+        {/* works */}
         <LazyComponent>
           <GraphTLR />
         </LazyComponent>
         <LazyComponent>
           <TLRDesc />
         </LazyComponent>
-
+{/* desc not worky */}
         <LazyComponent>
           <GraphTRF />
         </LazyComponent>
@@ -136,14 +136,14 @@ const About: React.FC = () => {
           <TRFDesc />
         </LazyComponent>
 
-
+{/* desc not worky */}
         <LazyComponent>
           <GraphPLR />
         </LazyComponent>
         <LazyComponent>
           <PLRDesc />
         </LazyComponent>
-
+{/* desc not worky */}
         <LazyComponent>
           <GraphPRF />
         </LazyComponent>
