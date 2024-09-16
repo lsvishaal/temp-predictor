@@ -8,6 +8,7 @@ import About from './Layouts/Pages/About';
 import GraphCustomYear from "./Layouts/Graphs/GraphCustomYear";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
+import ScrollToTop from "./components/ui/ScrollToTop";
 
 
 interface LazyComponentProps {
@@ -35,6 +36,7 @@ function App() {
   return (
     <div className="selection:bg-violet-500 selection:text-violet-950 bg-slate-950">
     <Router>
+    <ScrollToTop />
       <QueryClientProvider client={queryClient}>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <FloatingNav navItems={[{name: "Root", link: '/'}, {name: 'Breakdown', link: '/about'}]} />

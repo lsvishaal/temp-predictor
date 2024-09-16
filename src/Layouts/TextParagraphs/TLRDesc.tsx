@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   Table,
   TableHeader,
@@ -8,22 +9,14 @@ import {
   TableCell,
 } from '@/components/ui/table'; // Adjust the import path as necessary
 
-interface WeatherModel {
-  index: number;
-  Date: string;
-  Actual: number;
-  Prediction: number;
-  diff: number;
+interface PerformanceMeasures {
+  mean_absolute_error: number;
+  r2_score: number;
 }
 
 interface TemperatureLinear {
   variance: number;
-  Performace_measures: {
-    mean_absolute_error: number;
-    r2_score: number;
-  };
-  prediction: number;
-  weather_model: WeatherModel[];
+  Performance_measures: PerformanceMeasures;
 }
 
 const TLRDesc = () => {
@@ -38,6 +31,7 @@ const TLRDesc = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const result = await response.json();
+        console.log('Fetched data:', result); // Log the fetched data
         setData(result.temperature_linear);
       } catch (err) {
         if (err instanceof Error) {
@@ -54,49 +48,73 @@ const TLRDesc = () => {
 
   return (
     <div className="my-24 mx-4 sm:my-32 sm:mx-8 md:my-48 md:mx-16 lg:my-64 lg:mx-24">
-      <h1 className="text-3xl sm:text-4xl md:text-5xl text-red-400 font-bold text-center">
+      <motion.h1
+        className="text-3xl sm:text-4xl md:text-5xl text-red-400 font-bold text-center"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
         Linear Regression for Temperature
-      </h1>
+      </motion.h1>
 
-      <div className="text-lg sm:text-xl md:text-2xl mt-8 sm:mt-10 md:mt-12 text-justify mx-4 sm:mx-8 md:mx-16 lg:mx-48">
+      <motion.div
+        className="text-lg sm:text-xl md:text-2xl mt-8 sm:mt-10 md:mt-12 text-justify mx-4 sm:mx-8 md:mx-16 lg:mx-48"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+      >
         Since temperature typically exhibits{" "}
         <span className="font-bold text-red-400">less variance</span>,{" "}
         <span className="font-bold">linear regression </span>is more suitable
         for predicting temperature trends due to its ability to model linear
         relationships effectively.
-      </div>
+      </motion.div>
 
       {error && (
-        <div className="mt-8 text-red-500">
-          <p>Error fetching data: {error}</p>
-        </div>
+        <motion.div
+          className="mt-8 text-red-500"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+        >
+          <span>Error fetching data: {error}</span>
+        </motion.div>
       )}
 
       {data && (
-        <Table className="mt-20">
-          <TableHeader>
-            <TableRow className='font-bold md:text-3xl sm:text-base'>
-              <TableHead>Metric</TableHead>
-              <TableHead>Value</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell className='text-2xl font-bold'>Variance</TableCell>
-              <TableCell className='text-xl font-bold tracking-wider'>{data.variance}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className='text-2xl font-bold'>Mean Absolute Error</TableCell>
-              <TableCell className='text-xl font-bold tracking-wider'>{data.Performace_measures.mean_absolute_error}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className='text-2xl font-bold'>R² Score</TableCell>
-              <TableCell className='text-xl font-bold tracking-wider'>{data.Performace_measures.r2_score}</TableCell>
-            </TableRow>
-            <TableRow>
-            </TableRow>
-          </TableBody>
-        </Table>
+        <motion.div
+          className="mt-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.9 }}
+        >
+          <Table>
+            <TableHeader>
+              <TableRow className='font-bold md:text-3xl sm:text-base'>
+                <TableHead>Metric</TableHead>
+                <TableHead>Value</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell className='text-2xl font-bold'>Variance</TableCell>
+                <TableCell className='text-xl font-bold tracking-wider'>{data.variance}</TableCell>
+              </TableRow>
+              {data.Performance_measures && (
+                <>
+                  <TableRow>
+                    <TableCell className='text-2xl font-bold'>Mean Absolute Error</TableCell>
+                    <TableCell className='text-xl font-bold tracking-wider'>{data.Performance_measures.mean_absolute_error}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className='text-2xl font-bold'>R² Score</TableCell>
+                    <TableCell className='text-xl font-bold tracking-wider'>{data.Performance_measures.r2_score}</TableCell>
+                  </TableRow>
+                </>
+              )}
+            </TableBody>
+          </Table>
+        </motion.div>
       )}
     </div>
   );

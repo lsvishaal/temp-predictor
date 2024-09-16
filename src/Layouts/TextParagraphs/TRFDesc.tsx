@@ -57,12 +57,12 @@ const TRFDesc = () => {
   return (
     <div className="my-24 mx-4 sm:my-32 sm:mx-8 md:my-48 md:mx-16 lg:my-64 lg:mx-24">
       <motion.h1
-        className="text-3xl sm:text-4xl md:text-5xl text-red-400 font-bold text-center"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold text-center"
         initial={{ opacity: 0, y: 20 }}
         animate={controls}
         custom={0}
       >
-        Linear Regression for Temperature
+        <span className='text-green-400'>Random Forest</span> for <span className='text-red-400'>Temperature</span>
       </motion.h1>
 
       <motion.div
@@ -71,11 +71,9 @@ const TRFDesc = () => {
         animate={controls}
         custom={1}
       >
-        Since temperature typically exhibits{" "}
+        Since <span className="font-bold text-red-400">temperature</span> typically exhibits{" "}
         <span className="font-bold text-red-400">less variance</span>,{" "}
-        <span className="font-bold">linear regression </span>is more suitable
-        for predicting temperature trends due to its ability to model linear
-        relationships effectively.
+        <span className="font-bold text-green-400">Random Forest </span>is more suitable for predicting precipitation trends due to its ability to <span className="font-bold text-green-400"> model complex relationships effectively.</span>
       </motion.div>
 
       {error && (
