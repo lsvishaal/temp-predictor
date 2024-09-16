@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import {
   Table,
   TableHeader,
@@ -21,6 +22,7 @@ interface TemperatureRandomForest {
 const TRFDesc = () => {
   const [data, setData] = useState<TemperatureRandomForest | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const controls = useAnimation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,6 +32,7 @@ const TRFDesc = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const result = await response.json();
+        console.log('Fetched data:', result); // Debugging log
         setData(result.temperature_rf);
       } catch (err) {
         if (err instanceof Error) {
@@ -42,51 +45,84 @@ const TRFDesc = () => {
       }
     };
     fetchData();
-  }, []);
+
+    // Trigger staggered animations
+    controls.start(i => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.5 },
+    }));
+  }, [controls]);
 
   return (
     <div className="my-24 mx-4 sm:my-32 sm:mx-8 md:my-48 md:mx-16 lg:my-64 lg:mx-24">
-      <h1 className="text-3xl sm:text-4xl md:text-5xl text-red-400 font-bold text-center">
-        Random Forest for Temperature
-      </h1>
+      <motion.h1
+        className="text-3xl sm:text-4xl md:text-5xl text-red-400 font-bold text-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={controls}
+        custom={0}
+      >
+        Linear Regression for Temperature
+      </motion.h1>
 
-      <div className="text-lg sm:text-xl md:text-2xl mt-8 sm:mt-10 md:mt-12 text-justify mx-4 sm:mx-8 md:mx-16 lg:mx-48">
+      <motion.div
+        className="text-lg sm:text-xl md:text-2xl mt-8 sm:mt-10 md:mt-12 text-justify mx-4 sm:mx-8 md:mx-16 lg:mx-48"
+        initial={{ opacity: 0, y: 20 }}
+        animate={controls}
+        custom={1}
+      >
         Since temperature typically exhibits{" "}
         <span className="font-bold text-red-400">less variance</span>,{" "}
-        <span className="font-bold">random forest </span>is more suitable
-        for predicting temperature trends due to its ability to model complex
+        <span className="font-bold">linear regression </span>is more suitable
+        for predicting temperature trends due to its ability to model linear
         relationships effectively.
-      </div>
+      </motion.div>
 
       {error && (
-        <div className="mt-8 text-red-500">
-          <p>Error fetching data: {error}</p>
-        </div>
+        <motion.div
+          className="mt-8 text-red-500"
+          initial={{ opacity: 0, y: 20 }}
+          animate={controls}
+          custom={2}
+        >
+          <span>Error fetching data: {error}</span>
+        </motion.div>
       )}
 
       {data && (
-        <Table className="mt-20">
-          <TableHeader>
-            <TableRow className='font-bold md:text-3xl sm:text-base'>
-              <TableHead>Metric</TableHead>
-              <TableHead>Value</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell className='text-2xl font-bold'>Variance</TableCell>
-              <TableCell className='text-xl font-bold tracking-wider'>{data.variance}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className='text-2xl font-bold'>Mean Absolute Error</TableCell>
-              <TableCell className='text-xl font-bold tracking-wider'>{data.Performance_measures.mean_absolute_error}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className='text-2xl font-bold'>R² Score</TableCell>
-              <TableCell className='text-xl font-bold tracking-wider'>{data.Performance_measures.r2_score}</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
+        <motion.div
+          className="mt-20"
+          initial={{ opacity: 0, y: 20 }}
+          animate={controls}
+          custom={3}
+        >
+          <Table>
+            <TableHeader>
+              <TableRow className='font-bold md:text-3xl sm:text-base'>
+                <TableHead>Metric</TableHead>
+                <TableHead>Value</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell className='text-2xl font-bold'>Variance</TableCell>
+                <TableCell className='text-xl font-bold tracking-wider'>{data.variance}</TableCell>
+              </TableRow>
+              {data.Performance_measures && (
+                <>
+                  <TableRow>
+                    <TableCell className='text-2xl font-bold'>Mean Absolute Error</TableCell>
+                    <TableCell className='text-xl font-bold tracking-wider'>{data.Performance_measures.mean_absolute_error}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className='text-2xl font-bold'>R² Score</TableCell>
+                    <TableCell className='text-xl font-bold tracking-wider'>{data.Performance_measures.r2_score}</TableCell>
+                  </TableRow>
+                </>
+              )}
+            </TableBody>
+          </Table>
+        </motion.div>
       )}
     </div>
   );
