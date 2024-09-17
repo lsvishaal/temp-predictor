@@ -56,10 +56,8 @@ const PLRDesc = () => {
 
       <div className="text-lg sm:text-xl md:text-2xl mt-8 sm:mt-10 md:mt-12 text-justify mx-4 sm:mx-8 md:mx-16 lg:mx-48">
         Since precipitation typically exhibits{" "}
-        <span className="font-bold text-red-400">less variance</span>,{" "}
-        <span className="font-bold">linear regression </span>is more suitable
-        for predicting precipitation trends due to its ability to model linear
-        relationships effectively.
+        <span className="font-bold text-red-400">High Variance</span>,{" "}
+        <span className="font-bold text-blue-400">Linear Regression </span>is <strong>NOT</strong> the most suitable for predicting Precipitation trends.<br/> <p className='mt-2 text-violet-400 font-semibold'>However, it can still provide valuable insights at less variance datapoints.</p>
       </div>
 
       {error && (

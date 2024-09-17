@@ -76,7 +76,7 @@ export default function GraphTLR() {
   return (
     <Card className="p-4 sm:p-6 md:p-8 lg:p-10">
       <CardHeader>
-        <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl">Line Chart - Linear Regression</CardTitle>
+        <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl"> <span className='text-red-400'>Temperature</span> in <span className='text-blue-400'>Linear Regression</span></CardTitle>
         <CardDescription className="text-sm sm:text-base md:text-lg lg:text-xl">
           Showing temperature predictions using Linear Regression model
         </CardDescription>
@@ -121,10 +121,9 @@ export default function GraphTLR() {
       <CardFooter className="text-sm sm:text-base md:text-lg lg:text-xl">
         <div className="grid gap-2">
           <div className="flex items-center gap-2 font-medium leading-none">
-            Accuracy: 98.98% <TrendingUp className="h-4 w-4" />
           </div>
           <div className="flex items-center gap-2 leading-none text-muted-foreground">
-            Showing temperature predictions for the last period
+            Showing temperature predictions for the Year <strong>2023</strong>
           </div>
         </div>
       </CardFooter>

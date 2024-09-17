@@ -69,7 +69,7 @@ const GraphTRF = () => {
   return (
     <Card className="p-4 sm:p-6 md:p-8 lg:p-10">
       <CardHeader>
-        <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl">Line Chart - Temperature RF</CardTitle>
+        <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl"> <span className='text-red-400'>Temperature</span> in <span className='text-green-400'>Random Forest</span></CardTitle>
         <CardDescription className="text-sm sm:text-base md:text-lg lg:text-xl">
           Temperature Predictions
         </CardDescription>

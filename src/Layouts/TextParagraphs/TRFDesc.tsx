@@ -37,7 +37,7 @@ const TRFDesc = () => {
         setData(result.temperature_rf);
       } catch (err) {
         if (err instanceof Error) {
-          setError(err.message);
+          setError(`Error fetching data: ${err.message}`);
           console.error('Error fetching data:', err);
         } else {
           setError('An unknown error occurred');
@@ -56,7 +56,7 @@ const TRFDesc = () => {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
-        Random Forest  for Temperature
+        Random Forest for Temperature
       </motion.h1>
 
       <motion.div
@@ -65,7 +65,8 @@ const TRFDesc = () => {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.4, duration: 0.5 }}
       >
-        Since temperature typically exhibits less variance, Random Forest is more suitable for predicting temperature trends due to its ability to 
+        Random forest is used here to compare the outcome of linear regression for temperature prediction over a year.
+        <p className='mt-2 font-bold text-purple-400'>Both models show similar performance.</p>
       </motion.div>
 
       {error && (
@@ -75,7 +76,7 @@ const TRFDesc = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.6, duration: 0.5 }}
         >
-          <span>Error fetching data: {error}</span>
+          <span>{error}</span>
         </motion.div>
       )}
 

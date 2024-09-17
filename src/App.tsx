@@ -4,12 +4,11 @@ import { LampDemo } from "./components/ui/lamp";
 import { ThemeProvider } from "./components/ui/theme-provider";
 import Footer from "@/components/ui/Footer";
 import { FloatingNav } from "./components/ui/floating-navbar";
-import About from './Layouts/Pages/About'; 
+import About from "./Layouts/Pages/About";
 import GraphCustomYear from "./Layouts/Graphs/GraphCustomYear";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useInView } from 'react-intersection-observer';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 import ScrollToTop from "./components/ui/ScrollToTop";
-
 
 interface LazyComponentProps {
   children: ReactNode;
@@ -21,39 +20,45 @@ const LazyComponent: React.FC<LazyComponentProps> = ({ children }) => {
     threshold: 0.1, // Trigger when 10% of the component is in view
   });
 
-  return (
-    <div ref={ref}>
-      {inView ? children : null}
-    </div>
-  );
+  return <div ref={ref}>{inView ? children : null}</div>;
 };
 
 function App() {
   const queryClient = new QueryClient();
-  
-
 
   return (
     <div className="selection:bg-violet-500 selection:text-violet-950 bg-slate-950">
-    <Router>
-    <ScrollToTop />
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          <FloatingNav navItems={[{name: "Root", link: '/'}, {name: 'Breakdown', link: '/about'}]} />
-          
-          <Routes>
-            <Route path="/" element={<>
-              <LampDemo />
-              {/* <Hero /> */}
-              <LazyComponent><GraphCustomYear /></LazyComponent>
-            </>} />
-            <Route path="/about" element={<About />} />
-            {/* Add other routes here */}
-          </Routes>
-          <Footer />
-        </ThemeProvider>
-      </QueryClientProvider>
-    </Router>
+      <Router>
+        <ScrollToTop />
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+            <FloatingNav
+              navItems={[
+                { name: "Root", link: "/" },
+                { name: "Breakdown", link: "/about" },
+              ]}
+            />
+
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <LampDemo />
+                    {/* <Hero /> */}
+                    <LazyComponent>
+                      <GraphCustomYear />
+                    </LazyComponent>
+                  </>
+                }
+              />
+              <Route path="/about" element={<About />} />
+              {/* Add other routes here */}
+            </Routes>
+            <Footer />
+          </ThemeProvider>
+        </QueryClientProvider>
+      </Router>
     </div>
   );
 }
