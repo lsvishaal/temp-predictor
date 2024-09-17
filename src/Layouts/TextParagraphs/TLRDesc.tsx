@@ -55,12 +55,12 @@ const TLRDesc = () => {
   return (
     <div className="my-24 mx-4 sm:my-32 sm:mx-8 md:my-48 md:mx-16 lg:my-64 lg:mx-24">
       <motion.h1
-        className="text-3xl sm:text-4xl md:text-5xl text-red-400 font-bold text-center"
+        className="text-3xl sm:text-4xl md:text-5xl  font-bold text-center"
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
-        Linear Regression for Temperature
+        <span className='text-red-400'>Temperature</span> in <span className='text-blue-400'>Linear Regression</span>
       </motion.h1>
 
       <motion.div

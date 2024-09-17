@@ -1,7 +1,6 @@
 "use client";
 
 import { useQuery } from 'react-query';
-import { TrendingUp } from "lucide-react";
 import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import {
   Card,
@@ -30,9 +29,8 @@ const fetchTemperatureData = async () => {
     throw new Error('Network response was not ok');
   }
   const data = await response.json();
-  console.log('Fetched data:', data); // Log the fetched data
+  console.log('Fetched data:', data); 
 
-  // Map the data to the format expected by the chart
   return data.temperature_linear.weather_model.map((item: WeatherModelItem) => ({
     month: item.Date,
     desktop: item.Actual,
@@ -74,49 +72,53 @@ export default function GraphTLR() {
   }
 
   return (
-    <Card className="p-4 sm:p-6 md:p-8 lg:p-10">
+    <Card className="p-4 sm:p-6 md:p-8 lg:p-10 w-full max-w-7xl mx-auto">
       <CardHeader>
-        <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl"> <span className='text-red-400'>Temperature</span> in <span className='text-blue-400'>Linear Regression</span></CardTitle>
+        <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
+          <span className='text-red-400'>Temperature</span> in <span className='text-blue-400'>Linear Regression</span>
+        </CardTitle>
         <CardDescription className="text-sm sm:text-base md:text-lg lg:text-xl">
           Showing temperature predictions using Linear Regression model
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ChartContainer config={lineChartConfig} className="w-full h-64 sm:h-80 md:h-96 lg:h-[30rem]">
-          <LineChart
-            accessibilityLayer
-            data={data}
-            margin={{
-              left: 12,
-              right: 12,
-            }}
-            className="w-full h-full"
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="month"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
-            />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-            <Line
-              dataKey="desktop"
-              type="monotone"
-              stroke="var(--color-desktop)"
-              strokeWidth={2}
-              dot={false}
-            />
-            <Line
-              dataKey="mobile"
-              type="monotone"
-              stroke="var(--color-mobile)"
-              strokeWidth={2}
-              dot={false}
-            />
-          </LineChart>
-        </ChartContainer>
+        <div className="w-full overflow-x-auto">
+          <ChartContainer config={lineChartConfig} className="w-full h-64 sm:h-80 md:h-96 lg:h-[30rem]">
+            <LineChart
+              accessibilityLayer
+              data={data}
+              margin={{
+                left: 12,
+                right: 12,
+              }}
+              className="w-full h-full"
+            >
+              <CartesianGrid vertical={false} />
+              <XAxis
+                dataKey="month"
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                tickFormatter={(value) => value.slice(0, 3)}
+              />
+              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+              <Line
+                dataKey="desktop"
+                type="monotone"
+                stroke="var(--color-desktop)"
+                strokeWidth={2}
+                dot={false}
+              />
+              <Line
+                dataKey="mobile"
+                type="monotone"
+                stroke="var(--color-mobile)"
+                strokeWidth={2}
+                dot={false}
+              />
+            </LineChart>
+          </ChartContainer>
+        </div>
       </CardContent>
       <CardFooter className="text-sm sm:text-base md:text-lg lg:text-xl">
         <div className="grid gap-2">

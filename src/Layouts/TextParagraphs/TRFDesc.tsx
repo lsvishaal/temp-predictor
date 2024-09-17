@@ -51,12 +51,12 @@ const TRFDesc = () => {
   return (
     <div className="my-24 mx-4 sm:my-32 sm:mx-8 md:my-48 md:mx-16 lg:my-64 lg:mx-24">
       <motion.h1
-        className="text-3xl sm:text-4xl md:text-5xl text-red-400 font-bold text-center"
+        className="text-3xl sm:text-4xl md:text-5xl font-bold text-center"
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, duration: 0.5 }}
       >
-        Random Forest for Temperature
+        <span className='text-red-400'>Temperature</span> in <span className='text-green-400'>Random Forest</span>
       </motion.h1>
 
       <motion.div
@@ -65,7 +65,7 @@ const TRFDesc = () => {
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.4, duration: 0.5 }}
       >
-        Random forest is used here to compare the outcome of linear regression for temperature prediction over a year.
+        <span className='text-green-400 font-bold'>Random forest </span>is used here to compare the outcome of linear regression for temperature prediction over a year.
         <p className='mt-2 font-bold text-purple-400'>Both models show similar performance.</p>
       </motion.div>
 

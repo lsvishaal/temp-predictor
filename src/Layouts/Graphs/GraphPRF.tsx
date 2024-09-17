@@ -69,7 +69,7 @@ const GraphPRF = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Line Chart - Precipitation RF</CardTitle>
+        <CardTitle><span className='text-blue-800'>Precipitation</span> in <span className='text-green-400'>Random Forest</span></CardTitle>
         <CardDescription>Precipitation Predictions</CardDescription>
       </CardHeader>
       <CardContent>
