@@ -11,6 +11,7 @@ import PRFDesc from "../TextParagraphs/PRFDesc";
 import HeroSection from "./About/HeroSection";
 import DoubleScroll from "./About/ModelDescription";
 import DataOutputOutcome from "./About/DataOutputOutcome";
+import CombinedGraphAndDescription from "../Graphs/CombinedGraphAndDescription";
 
 const About: React.FC = () => {
   interface LazyComponentProps {
@@ -35,6 +36,7 @@ const About: React.FC = () => {
         
         {/* Double Card Scroll */}
         <DoubleScroll />
+        <CombinedGraphAndDescription />
         
       </LazyComponent>
 
