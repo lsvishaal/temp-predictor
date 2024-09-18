@@ -1,12 +1,10 @@
 import React, { ReactNode } from "react";
 import { useInView } from "react-intersection-observer";
-import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import GraphTLR from "../Graphs/GraphTLR";
 import GraphTRF from "../Graphs/GraphTRF";
 import GraphPLR from "../Graphs/GraphPLR";
 import GraphPRF from "../Graphs/GraphPRF";
 import TLRDesc from "../TextParagraphs/TLRDesc";
-import { Badge } from "@/components/ui/badge";
 import TRFDesc from "../TextParagraphs/TRFDesc";
 import PLRDesc from "../TextParagraphs/PLRDesc";
 import PRFDesc from "../TextParagraphs/PRFDesc";

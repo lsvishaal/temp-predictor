@@ -9,6 +9,7 @@ import GraphCustomYear from "./Layouts/Graphs/GraphCustomYear";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import ScrollToTop from "./components/ui/ScrollToTop";
+import { Hero } from "./components/ui/Hero";
 
 interface LazyComponentProps {
   children: ReactNode;
@@ -27,15 +28,15 @@ function App() {
   const queryClient = new QueryClient();
 
   return (
-    <div className="selection:bg-violet-500 selection:text-violet-950 bg-slate-950">
+    <div className="selection:bg-violet-500 selection:text-violet-950 ">
       <Router>
         <ScrollToTop />
         <QueryClientProvider client={queryClient}>
           <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
             <FloatingNav
               navItems={[
-                { name: "Root", link: "/" },
-                { name: "Breakdown", link: "/about" },
+                { name: "Home", link: "/" },
+                { name: "About", link: "/about" },
               ]}
             />
 
@@ -45,13 +46,14 @@ function App() {
                 element={
                   <>
                     <LampDemo />
-                    {/* <Hero /> */}
+                    <Hero />
                     <LazyComponent>
                       <GraphCustomYear />
                     </LazyComponent>
                   </>
                 }
               />
+              
               <Route path="/about" element={<About />} />
               {/* Add other routes here */}
             </Routes>
