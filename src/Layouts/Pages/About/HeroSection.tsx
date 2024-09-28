@@ -14,7 +14,7 @@ const HeroSection: React.FC = () => {
   return (
     <BackgroundBeamsWithCollision>
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center bg-gradient-to-r from-blue-400 to-red-50 bg-clip-text text-transparent">
-        <span className="text-violet-400">Let's Analyze</span>{" "}
+        <span className="text-violet-400 mb-4 block">Let's Analyze</span>{" "}
         <span className="text-red-400">
           <FlipWords
             words={wordsalpha}

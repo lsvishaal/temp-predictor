@@ -16,11 +16,18 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 
+// ChartData interface with additional calculated statistics.
 interface ChartData {
   linear_temp: Array<{ Date: string; predicted_value: number }>;
   linear_precip: Array<{ Date: string; predicted_value: number }>;
   rf_temp: Array<{ Date: string; predicted_value: number }>;
   rf_precip: Array<{ Date: string; predicted_value: number }>;
+}
+
+interface Statistics {
+  mean: number;
+  median: number;
+  mode: number;
 }
 
 const GraphCustomYear = () => {
@@ -33,6 +40,29 @@ const GraphCustomYear = () => {
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [predictionsGenerated, setPredictionsGenerated] = useState<boolean>(false);
+  const [statistics, setStatistics] = useState<{ [key: string]: Statistics }>({});
+
+  // Helper functions to calculate mean, median, and mode
+  const calculateStatistics = (data: Array<{ predicted_value: number }>): Statistics => {
+    const values = data.map(item => item.predicted_value);
+    const mean = values.reduce((a, b) => a + b, 0) / values.length;
+    
+    // Calculate median
+    values.sort((a, b) => a - b);
+    const mid = Math.floor(values.length / 2);
+    const median = values.length % 2 !== 0 ? values[mid] : (values[mid - 1] + values[mid]) / 2;
+
+    // Calculate mode
+    const frequency: { [key: number]: number } = {};
+    values.forEach(val => frequency[val] = (frequency[val] || 0) + 1);
+    const mode = Object.keys(frequency).reduce((a, b) => frequency[Number(a)] > frequency[Number(b)] ? a : b, 0);
+
+    return {
+      mean,
+      median,
+      mode: Number(mode),
+    };
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -52,6 +82,15 @@ const GraphCustomYear = () => {
         rf_temp: data.rf_temp,
         rf_precip: data.rf_precip,
       });
+
+      // Calculate statistics for each dataset
+      setStatistics({
+        linear_temp: calculateStatistics(data.linear_temp),
+        linear_precip: calculateStatistics(data.linear_precip),
+        rf_temp: calculateStatistics(data.rf_temp),
+        rf_precip: calculateStatistics(data.rf_precip),
+      });
+
       setPredictionsGenerated(true);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -97,8 +136,8 @@ const GraphCustomYear = () => {
 
       {predictionsGenerated && (
         (['linear_temp', 'linear_precip', 'rf_temp', 'rf_precip'] as const).map((key) => (
-          <div key={key} className="my-6 w-full max-w-7xl">
-            <Card>
+          <div key={key} className="flex flex-col lg:flex-row my-6 w-full max-w-7xl">
+            <Card className="flex-1">
               <CardHeader>
                 <CardTitle>{key.replace('_', ' ').toUpperCase()}</CardTitle>
                 <CardDescription>Year: {year}</CardDescription>
@@ -118,8 +157,12 @@ const GraphCustomYear = () => {
                       dataKey="Date"
                       tickLine={false}
                       axisLine={false}
-                      tickMargin={8}
-                      tickFormatter={(value = '') => value.slice(0, 5)}
+                      tickMargin={12}
+                      interval={32} // Ensure all ticks are shown
+                      tickFormatter={(_value, index) => {
+                        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                        return months[index % 12];
+                      }}
                     />
                     <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
                     <Line
@@ -133,6 +176,38 @@ const GraphCustomYear = () => {
                 </ChartContainer>
               </CardContent>
             </Card>
+            <div className="mt-4 lg:mt-0 lg:ml-4 flex-shrink-0">
+              <Card className="shadow-sm border rounded-lg p-4 bg-white dark:bg-slate-950">
+                <CardHeader>
+                  <CardTitle></CardTitle>
+                  <CardDescription>{key.replace('_', ' ').toUpperCase()} Stats</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <table className="min-w-full bg-white dark:bg-slate-950 border">
+                    <thead>
+                      <tr className='text-orange-200'>
+                        <th className="px-4 py-2 border">Statistic</th>
+                        <th className="px-4 py-2 border">Value</th>
+                      </tr>
+                    </thead>
+                    <tbody className='text-orange-400'>
+                      <tr>
+                        <td className="px-4 py-2 border">Mean</td>
+                        <td className="px-4 py-2 border font-bold">{statistics[key]?.mean.toFixed(2) || 'N/A'}</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2 border">Median</td>
+                        <td className="px-4 py-2 border font-bold">{statistics[key]?.median.toFixed(2) || 'N/A'}</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2 border">Mode</td>
+                        <td className="px-4 py-2 border font-bold">{statistics[key]?.mode.toFixed(2) || 'N/A'}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         ))
       )}
