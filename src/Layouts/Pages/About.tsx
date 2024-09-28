@@ -1,15 +1,11 @@
 import React, { ReactNode } from "react";
 import { useInView } from "react-intersection-observer";
-import GraphTRF from "../Graphs/GraphTRF";
-import GraphPLR from "../Graphs/GraphPLR";
-import GraphPRF from "../Graphs/GraphPRF";
-import TRFDesc from "../TextParagraphs/TRFDesc";
-import PLRDesc from "../TextParagraphs/PLRDesc";
-import PRFDesc from "../TextParagraphs/PRFDesc";
+import PRFDesc from "./About/PrecipRF";
 import HeroSection from "./About/HeroSection";
 import DoubleScroll from "./About/ModelDescription";
-import DataOutputOutcome from "./About/DataOutputOutcome";
-import CombinedGraphAndDescription from "../Graphs/CombinedGraphAndDescription";
+import TempRF from "./About/TempRF";
+import TempLR from "./About/TempLR";
+import PrecipLR from "./About/PrecipLR";
 
 const About: React.FC = () => {
   interface LazyComponentProps {
@@ -34,41 +30,43 @@ const About: React.FC = () => {
         
         {/* Double Card Scroll */}
         <DoubleScroll />
-        
+
+      {/* Data-output-outcome */}
+      {/* <DataOutputOutcome /> */}
         
       </LazyComponent>
 
+      
       {/* Graph & Desc Section */}
-      <div className=" ">
+      <div className="px-4 md:px-8 lg:px-16 space-y-10">
         <LazyComponent>
-        <CombinedGraphAndDescription />
+          <div className="mb-80">
+        <TempLR />
+          </div>
         </LazyComponent>
 
         <LazyComponent>
-          <GraphTRF />
+          <div className="mb-80">
+        <TempRF />
+          </div>
         </LazyComponent>
+
         <LazyComponent>
-          <TRFDesc />
+          <div className="mb-80">
+        <PrecipLR />
+          </div>
         </LazyComponent>
 
 
+
         <LazyComponent>
-          <GraphPLR />
-        </LazyComponent>
-        <LazyComponent>
-          <PLRDesc />
-        </LazyComponent>
-        
-        <LazyComponent>
-          <GraphPRF />
-        </LazyComponent>
-        <LazyComponent>
-          <PRFDesc />
+          <div className="mb-80">
+        <PRFDesc />
+          </div>
         </LazyComponent>
       </div>
 
-      {/* Data-output-outcome */}
-      <DataOutputOutcome />
+     
       
       </div>
   );

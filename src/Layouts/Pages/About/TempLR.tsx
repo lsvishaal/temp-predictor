@@ -82,7 +82,7 @@ const lineChartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function CombinedGraphAndDescription() {
+export default function TempLR() {
   const { data: temperatureData, error: graphError, isLoading: graphLoading } = useQuery<WeatherModelItem[], Error>('temperatureData', fetchTemperatureData);
   const [performanceData, setPerformanceData] = useState<TemperatureLinear | null>(null);
   const [performanceError, setPerformanceError] = useState<string | null>(null);
@@ -124,70 +124,69 @@ export default function CombinedGraphAndDescription() {
   }
 
   return (
-    <div className="grid grid-cols-[70%_30%] gap-4 mx-2 max-w-full p-1 sm:p-2 md:p-4 lg:p-6">
+    <div className="grid grid-cols-[70%_30%] gap-4  max-w-full p-1 sm:p-2 md:p-4 lg:p-6">
       
-{/* Left side: Graph */}
-<Card className="w-full">
-  <CardHeader>
-    <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
-          <span className='text-red-400'>Temperature</span> in <span className='text-blue-400'>Linear Regression</span>
-        </CardTitle>
-    <CardDescription className="text-sm sm:text-base md:text-lg lg:text-xl">
-      Showing temperature predictions using Linear Regression model
-    </CardDescription>
-  </CardHeader>
-  <CardContent>
-    <ChartContainer config={lineChartConfig} className="w-full h-64 sm:h-80 md:h-96 lg:h-[30rem]">
-      <LineChart
-        data={temperatureData}
-        margin={{ left: 12, right: 0 }}  // Removed right margin
-        className="w-full h-full"
-      >
-        <CartesianGrid vertical={false} />
-        
-        <XAxis
-          dataKey="month" // Assuming 'month' contains the date data
-          tickLine={false}
-          axisLine={false}
-          tickMargin={8}
-          interval={Math.floor(temperatureData.length / 12)}  // Display one tick per month
-          tickFormatter={(_value, index) => {
-            const hardcodedMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            return hardcodedMonths[index % 12]; // Cycle through hardcoded months
-          }}
-        />
+      {/* Left side: Graph */}
+      <Card className="w-full">
+        <CardHeader>
+          <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
+            <span className='text-red-400'>Temperature</span> in <span className='text-blue-400'>Linear Regression</span>
+          </CardTitle>
+          <CardDescription className="text-sm sm:text-base md:text-lg lg:text-xl">
+            Showing temperature predictions using Linear Regression model
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ChartContainer config={lineChartConfig} className="w-full h-64 sm:h-80 md:h-96 lg:h-[30rem]">
+            <LineChart
+              data={temperatureData}
+              margin={{ left: 12, right: 12 }}  
+              className="w-full h-full"
+            >
+              <CartesianGrid vertical={false} />
+              <XAxis
+                dataKey="month" // Assuming 'month' contains the date data
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                interval={Math.floor(temperatureData.length / 12)}  // Display one tick per month
+                tickFormatter={(_value, index) => {
+                  const hardcodedMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                  return hardcodedMonths[index % 12]; // Cycle through hardcoded months
+                }}
+              />
 
-        <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-        <Line
-          dataKey="desktop"
-          type="monotone"
-          stroke="var(--color-desktop)"
-          strokeWidth={2}
-          dot={false}
-        />
-        <Line
-          dataKey="mobile"
-          type="monotone"
-          stroke="var(--color-mobile)"
-          strokeWidth={2}
-          dot={false}
-        />
-      </LineChart>
-    </ChartContainer>
-  </CardContent>
-  <CardFooter className="text-sm sm:text-base md:text-lg lg:text-xl">
-    <div className="grid gap-2">
-      <div className="flex items-center gap-2 font-medium leading-none">
-      </div>
-      <div className="flex items-center gap-2 leading-none text-muted-foreground">
-        Showing temperature predictions for the Year <strong>2023</strong>
-      </div>
-    </div>
-  </CardFooter>
-</Card>
-
-
-
+              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+              <Line
+                dataKey="desktop"
+                type="monotone"
+                stroke="var(--color-desktop)"
+                strokeWidth={2}
+                dot={false}
+              />
+              <Line
+                dataKey="mobile"
+                type="monotone"
+                stroke="var(--color-mobile)"
+                strokeWidth={2}
+                dot={false}
+              />
+            </LineChart>
+          </ChartContainer>
+        </CardContent>
+        <CardFooter className="text-sm sm:text-base md:text-lg lg:text-xl">
+          <div className="flex w-full items-start gap-2">
+            <div className="grid gap-2">
+              <div className="flex items-center gap-2 font-medium leading-none">
+                {/* Performance Information or Any Additional Footer Content */}
+              </div>
+              <div className="flex items-center gap-2 leading-none text-muted-foreground">
+                Showing temperature predictions for the Year <strong>2023</strong>
+              </div>
+            </div>
+          </div>
+        </CardFooter>
+      </Card>
 
       {/* Right side: Description and Performance Metrics */}
       <div className="grid grid-rows-2 gap-4">
