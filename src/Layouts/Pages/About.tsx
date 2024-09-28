@@ -1,10 +1,8 @@
 import React, { ReactNode } from "react";
 import { useInView } from "react-intersection-observer";
-import GraphTLR from "../Graphs/GraphTLR";
 import GraphTRF from "../Graphs/GraphTRF";
 import GraphPLR from "../Graphs/GraphPLR";
 import GraphPRF from "../Graphs/GraphPRF";
-import TLRDesc from "../TextParagraphs/TLRDesc";
 import TRFDesc from "../TextParagraphs/TRFDesc";
 import PLRDesc from "../TextParagraphs/PLRDesc";
 import PRFDesc from "../TextParagraphs/PRFDesc";
@@ -36,17 +34,14 @@ const About: React.FC = () => {
         
         {/* Double Card Scroll */}
         <DoubleScroll />
-        <CombinedGraphAndDescription />
+        
         
       </LazyComponent>
 
       {/* Graph & Desc Section */}
-      <div className="mx-20 grid grid-flow-row mb-20 relative ">
+      <div className=" ">
         <LazyComponent>
-          <GraphTLR />
-        </LazyComponent>
-        <LazyComponent>
-          <TLRDesc />
+        <CombinedGraphAndDescription />
         </LazyComponent>
 
         <LazyComponent>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from 'react-query';
-import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
+import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 import {
   Card,
   CardContent,
@@ -130,8 +130,8 @@ export default function CombinedGraphAndDescription() {
 <Card className="w-full">
   <CardHeader>
     <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
-      {/* Title for the Chart */}
-    </CardTitle>
+          <span className='text-red-400'>Temperature</span> in <span className='text-blue-400'>Linear Regression</span>
+        </CardTitle>
     <CardDescription className="text-sm sm:text-base md:text-lg lg:text-xl">
       Showing temperature predictions using Linear Regression model
     </CardDescription>
@@ -150,12 +150,11 @@ export default function CombinedGraphAndDescription() {
           tickLine={false}
           axisLine={false}
           tickMargin={8}
-          interval={Math.floor(temperatureData.length / 12)}  // Display fewer ticks, one per month
-          tickFormatter={(value) => {
-            const date = new Date(value);
-            return date.toLocaleString('default', { month: 'short' }); // Just the month
+          interval={Math.floor(temperatureData.length / 12)}  // Display one tick per month
+          tickFormatter={(index) => {
+            const hardcodedMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            return hardcodedMonths[index % 12]; // Cycle through hardcoded months
           }}
-          
         />
 
         <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
