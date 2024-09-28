@@ -151,7 +151,7 @@ export default function CombinedGraphAndDescription() {
           axisLine={false}
           tickMargin={8}
           interval={Math.floor(temperatureData.length / 12)}  // Display one tick per month
-          tickFormatter={(index) => {
+          tickFormatter={(_value, index) => {
             const hardcodedMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
             return hardcodedMonths[index % 12]; // Cycle through hardcoded months
           }}
