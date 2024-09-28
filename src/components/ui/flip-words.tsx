@@ -1,12 +1,11 @@
 "use client";
-import  { useCallback, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, LayoutGroup } from "framer-motion";
-import { TypewriterEffectSmooth } from "../ui/typewriter-effect";
+import  { useCallback, useEffect, useState } from "react";
+import { AnimatePresence, motion, } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export const FlipWords = ({
   words,
-  duration = 3000,
+  duration = 1000,
   className,
 }: {
   words: string[];

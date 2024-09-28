@@ -9,26 +9,26 @@ export function LampDemo() {
 
   return (
     <LampContainer>
-        <motion.h1
-          initial={{ opacity: 0.5, y: 100 }}
-          whileInView={{ opacity: 1, y: -40 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
-          className="mt-1 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-5xl sm:text-6xl md:text-7xl lg:text-7xl tracking-wider font-medium text-transparent"
-        >
-          Predict. Visualize.
-          <br />
-          <FlipWords
-            words={words1}
-            duration={2000}
-            className="text-center text-purple-400 font-thin tracking-wider text-xl sm:text-xl md:text-xl lg:text-3xl"
-          />
-          <br />
-        </motion.h1>
-      </LampContainer>
+      <motion.h1
+        initial={{ opacity: 0.5, y: 100 }}
+        whileInView={{ opacity: 1, y: -40 }}
+        transition={{
+          delay: 0.3,
+          duration: 0.8,
+          ease: "easeInOut",
+        }}
+        className="mt-[0.7rem] bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-5xl sm:text-6xl md:text-7xl lg:text-7xl tracking-wider font-medium text-transparent"
+      >
+        Predict. Visualize.
+        <br />
+        <FlipWords
+          words={words1}
+          duration={2000}
+          className="text-center text-purple-400 font-thin tracking-wider text-xl sm:text-xl md:text-xl lg:text-3xl"
+        />
+        <br />
+      </motion.h1>
+    </LampContainer>
   );
 }
 
