@@ -46,7 +46,7 @@ function App() {
                 element={
                   <>
                     <LampDemo />
-                    <Hero />
+                    {/* <Hero /> */}
                     <LazyComponent>
                       <GraphCustomYear />
                     </LazyComponent>

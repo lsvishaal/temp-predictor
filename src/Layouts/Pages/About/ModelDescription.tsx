@@ -49,7 +49,7 @@ const DoubleScroll = () => {
         </div>
       }
       children={
-        <div className="mb-16 mt-10 text-3xl font-normal text-justify-center text-slate-300">
+        <div className="mb-16 mt-10 text-3xl font-normal text-justify-center text-black dark:text-slate-300">
           <p>
             Random forest is an algorithm that{" "}
             <span className="text-green-400 font-extrabold">

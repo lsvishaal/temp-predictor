@@ -57,8 +57,6 @@ const About: React.FC = () => {
           </div>
         </LazyComponent>
 
-
-
         <LazyComponent>
           <div className="mb-80">
         <PRFDesc />
@@ -66,8 +64,6 @@ const About: React.FC = () => {
         </LazyComponent>
       </div>
 
-     
-      
       </div>
   );
 };

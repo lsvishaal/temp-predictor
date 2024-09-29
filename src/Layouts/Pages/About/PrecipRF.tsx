@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { TrendingUp } from 'lucide-react';
 import { CartesianGrid, Line, LineChart, XAxis } from 'recharts';
 import { motion } from 'framer-motion';
 import {
@@ -57,11 +56,14 @@ const PrecipRF = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const result = await response.json();
+
+        // Set the chart data with the original detailed daily values
         const formattedData = result.precipitation_rf.weather_model.map((item: WeatherModelItem) => ({
-          month: item.Date,
+          Date: item.Date,
           Actual: item.Actual,
           Prediction: item.Prediction,
         }));
+
         setChartData(formattedData);
         setPerformanceData(result.precipitation_rf);
         setLoading(false);
@@ -105,6 +107,11 @@ const PrecipRF = () => {
     return <div>Error: {error}</div>;
   }
 
+  // Hardcoded months for the XAxis labels
+  const hardcodedMonths = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+  ];
+
   return (
     <div className="grid grid-cols-[70%_30%] gap-4 mx-1 max-w-full p-1 sm:p-2 md:p-4 lg:p-6">
       
@@ -121,7 +128,6 @@ const PrecipRF = () => {
         <CardContent>
           <ChartContainer config={chartConfig} className="w-full h-64 sm:h-80 md:h-96 lg:h-[30rem]">
             <LineChart
-              accessibilityLayer
               data={chartData}
               margin={{
                 left: 12,
@@ -131,11 +137,16 @@ const PrecipRF = () => {
             >
               <CartesianGrid vertical={false} />
               <XAxis
-                dataKey="month"
+                dataKey="Date" // Use the original Date field from the data
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
-                tickFormatter={(value) => value.slice(0, 3)}
+                interval={Math.floor(chartData.length / 12)} // Control the interval to show monthly labels
+                tickFormatter={(value) => {
+                  // Convert the Date value to display only the month
+                  const date = new Date(value);
+                  return hardcodedMonths[date.getMonth()]; // Return the corresponding month name
+                }}
               />
               <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
               <Line
@@ -158,11 +169,8 @@ const PrecipRF = () => {
         <CardFooter className="text-sm sm:text-base md:text-lg lg:text-xl">
           <div className="flex w-full items-start gap-2">
             <div className="grid gap-2">
-              <div className="flex items-center gap-2 font-medium leading-none">
-                Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-              </div>
-              <div className="flex items-center gap-2 leading-none text-muted-foreground">
-                Showing precipitation predictions for the last period
+              <div className="flex items-center gap-2 text-slate-500 leading-none">
+                Showing <b>precipitation</b> predictions for the Year <span className='font-bold'>2023</span>
               </div>
             </div>
           </div>

@@ -157,8 +157,8 @@ const PrecipLR = () => {
         </CardContent>
         <CardFooter className="text-sm sm:text-base md:text-lg lg:text-xl">
           <div className="grid gap-2">
-            <div className="flex items-center gap-2 font-medium leading-none">
-              Showing precipitation predictions for the last period
+            <div className="flex items-center gap-2 text-slate-500 leading-none">
+              Showing <b>precipitation</b> predictions for the Year <span className='font-bold'>2023</span>
             </div>
           </div>
         </CardFooter>
