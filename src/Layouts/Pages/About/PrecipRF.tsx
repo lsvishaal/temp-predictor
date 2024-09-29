@@ -136,18 +136,19 @@ const PrecipRF = () => {
               className="w-full h-full"
             >
               <CartesianGrid vertical={false} />
+
               <XAxis
-                dataKey="Date" // Use the original Date field from the data
+                dataKey="month" // Assuming 'month' contains the date data
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
-                interval={Math.floor(chartData.length / 12)} // Control the interval to show monthly labels
-                tickFormatter={(value) => {
-                  // Convert the Date value to display only the month
-                  const date = new Date(value);
-                  return hardcodedMonths[date.getMonth()]; // Return the corresponding month name
+                interval={31}  // Display one tick per month
+                tickFormatter={(_value, index) => {
+                  const hardcodedMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                  return hardcodedMonths[index % 12]; // Cycle through hardcoded months
                 }}
               />
+              
               <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
               <Line
                 dataKey="Actual"

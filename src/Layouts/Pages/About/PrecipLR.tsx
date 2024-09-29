@@ -109,7 +109,7 @@ const PrecipLR = () => {
     <div className="grid grid-cols-[70%_30%] gap-4 mx-1 max-w-full p-1 sm:p-2 md:p-4 lg:p-6">
       
       {/* Left side: Graph */}
-      <Card className="w-full">
+      <Card className="w-full drop-shadow-2xl">
         <CardHeader>
           <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
             <span className='text-blue-800'>Precipitation</span> in <span className='text-blue-400'>Linear Regression</span>
@@ -130,12 +130,16 @@ const PrecipLR = () => {
               >
                 <CartesianGrid vertical={false} />
                 <XAxis
-                  dataKey="month"
-                  tickLine={false}
-                  axisLine={false}
-                  tickMargin={8}
-                  tickFormatter={(value = '') => value.slice(0, 3)}
-                />
+                dataKey="month" // Assuming 'month' contains the date data
+                tickLine={false}
+                axisLine={false}
+                tickMargin={8}
+                interval={31}  // Display one tick per month
+                tickFormatter={(_value, index) => {
+                  const hardcodedMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                  return hardcodedMonths[index % 12]; // Cycle through hardcoded months
+                }}
+              />
                 <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
                 <Line
                   dataKey="Actual"
