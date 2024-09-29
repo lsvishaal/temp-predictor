@@ -9,7 +9,6 @@ import GraphCustomYear from "./Layouts/Graphs/GraphCustomYear";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import ScrollToTop from "./components/ui/ScrollToTop";
-import { Hero } from "./components/ui/Hero";
 
 interface LazyComponentProps {
   children: ReactNode;

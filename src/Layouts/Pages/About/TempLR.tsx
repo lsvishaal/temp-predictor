@@ -127,7 +127,7 @@ export default function TempLR() {
     <div className="grid grid-cols-[70%_30%] gap-4  max-w-full p-1 sm:p-2 md:p-4 lg:p-6">
       
       {/* Left side: Graph */}
-      <Card className="w-full border border-double border-black dark:border-inherit drop-shadow-2xl ">
+      <Card className="w-full drop-shadow-2xl ">
         <CardHeader>
           <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
             <span className='text-red-400'>Temperature</span> in <span className='text-blue-400'>Linear Regression</span>
