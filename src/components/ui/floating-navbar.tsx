@@ -8,6 +8,7 @@ import {
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Link } from 'react-router-dom';
+import { ModeToggle } from "./mode-toggle";
 
 export const FloatingNav = ({
   navItems,
@@ -72,6 +73,10 @@ export const FloatingNav = ({
             <span className="block text-sm">{navItem.name}</span>
           </Link>
         ))}
+        {/* Theme-Switcher */}
+        <ModeToggle />
+
+        {/* Front-End */}
         <a
           href="https://github.com/lsvishaal/temp-predictor"
           target="_blank"
@@ -93,6 +98,8 @@ export const FloatingNav = ({
           <span>Front-End</span>
           <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent h-px" />
         </a>
+
+        {/* Back-End */}
         <a
           
           href="https://github.com/VijayAnand58/project_weather"

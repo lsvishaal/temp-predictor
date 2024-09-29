@@ -52,10 +52,10 @@ const GraphCustomYear = () => {
     const mid = Math.floor(values.length / 2);
     const median = values.length % 2 !== 0 ? values[mid] : (values[mid - 1] + values[mid]) / 2;
 
-    // Calculate mode
+     // Calculate mode
     const frequency: { [key: number]: number } = {};
     values.forEach(val => frequency[val] = (frequency[val] || 0) + 1);
-    const mode = Object.keys(frequency).reduce((a, b) => frequency[Number(a)] > frequency[Number(b)] ? a : b, 0);
+    const mode = Number(Object.keys(frequency).reduce((a, b) => frequency[Number(a)] > frequency[Number(b)] ? a : b));
 
     return {
       mean,

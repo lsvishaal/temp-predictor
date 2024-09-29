@@ -127,7 +127,7 @@ export default function TempLR() {
     <div className="grid grid-cols-[70%_30%] gap-4  max-w-full p-1 sm:p-2 md:p-4 lg:p-6">
       
       {/* Left side: Graph */}
-      <Card className="w-full">
+      <Card className="w-full border border-double border-black dark:border-inherit drop-shadow-2xl ">
         <CardHeader>
           <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
             <span className='text-red-400'>Temperature</span> in <span className='text-blue-400'>Linear Regression</span>
@@ -189,11 +189,11 @@ export default function TempLR() {
       </Card>
 
       {/* Right side: Description and Performance Metrics */}
-      <div className="grid grid-rows-2 gap-4">
+      <div className="grid grid-rows-2 gap-4 ">
         
         {/* Upper half: Description */}
         <motion.div
-          className="text-lg sm:text-xl md:text-2xl text-justify"
+          className="text-lg sm:text-xl md:text-2xl text-justify "
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
