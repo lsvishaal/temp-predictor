@@ -87,6 +87,9 @@ const TempRF = () => {
     },
   } satisfies ChartConfig;
 
+  // Hardcoded month labels for the X-axis
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -103,7 +106,7 @@ const TempRF = () => {
   }
 
   return (
-    <div className="grid grid-cols-[70%_30%] gap-4  max-w-full p-1 sm:p-2 md:p-4 lg:p-6">
+    <div className="grid grid-cols-[70%_30%] gap-4 max-w-full p-1 sm:p-2 md:p-4 lg:p-6">
       
       {/* Left side: Graph */}
       <Card className="w-full">
@@ -118,7 +121,6 @@ const TempRF = () => {
         <CardContent>
           <ChartContainer config={chartConfig} className="w-full h-64 sm:h-80 md:h-96 lg:h-[30rem]">
             <LineChart
-              accessibilityLayer
               data={chartData}
               margin={{
                 left: 12,
@@ -132,7 +134,9 @@ const TempRF = () => {
                 tickLine={false}
                 axisLine={false}
                 tickMargin={8}
-                tickFormatter={(value) => value.slice(0, 3)}
+                ticks={months}
+                interval={0} // Show all months evenly spaced
+                tickFormatter={(value, index) => months[index % months.length]} // Use hardcoded month names
               />
               <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
               <Line
@@ -155,9 +159,8 @@ const TempRF = () => {
         <CardFooter className="text-sm sm:text-base md:text-lg lg:text-xl">
           <div className="flex w-full items-start gap-2">
             <div className="grid gap-2">
-              
               <div className="flex items-center gap-2 leading-none text-muted-foreground">
-              Showing temperature predictions for the Year <span className='font-bold font'>2023</span>
+                Showing temperature predictions for the Year <span className='font-bold'>2023</span>
               </div>
             </div>
           </div>
