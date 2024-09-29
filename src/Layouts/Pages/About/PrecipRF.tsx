@@ -107,11 +107,6 @@ const PrecipRF = () => {
     return <div>Error: {error}</div>;
   }
 
-  // Hardcoded months for the XAxis labels
-  const hardcodedMonths = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-  ];
-
   return (
     <div className="grid grid-cols-[70%_30%] gap-4 mx-1 max-w-full p-1 sm:p-2 md:p-4 lg:p-6">
       
@@ -148,7 +143,7 @@ const PrecipRF = () => {
                   return hardcodedMonths[index % 12]; // Cycle through hardcoded months
                 }}
               />
-              
+
               <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
               <Line
                 dataKey="Actual"
