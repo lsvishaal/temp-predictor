@@ -16,7 +16,7 @@ const Footer = () => {
 
       {/* Right Side: LinkedIn */}
       <div className="flex space-x-4">
-        <a href="www.linkedin.com/in/vishaal-ls-439196181" className="hover:text-gray-200 transition-colors">
+        <a href="https://www.linkedin.com/in/vishaal-ls-439196181" className="hover:text-gray-200 transition-colors">
           <FaLinkedin />
         </a>
       </div>
