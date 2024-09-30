@@ -106,7 +106,7 @@ const PrecipLR = () => {
   }
 
   return (
-    <div className="grid grid-cols-[70%_30%] gap-4 mx-1 max-w-full p-1 sm:p-2 md:p-4 lg:p-6">
+    <div className="grid grid-cols-1 md:grid-cols-[70%_30%] gap-4 mx-1 max-w-full p-2 sm:p-4 md:p-6">
       
       {/* Left side: Graph */}
       <Card className="w-full drop-shadow-2xl">
@@ -123,23 +123,21 @@ const PrecipLR = () => {
             <ResponsiveContainer width="100%" height="100%">
               <LineChart
                 data={chartData}
-                margin={{
-                  left: 12,
-                  right: 12,
-                }}
+                margin={{ left: 12, right: 12 }}
+                className="w-full h-full"
               >
                 <CartesianGrid vertical={false} />
                 <XAxis
-                dataKey="month" // Assuming 'month' contains the date data
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                interval={31}  // Display one tick per month
-                tickFormatter={(_value, index) => {
-                  const hardcodedMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                  return hardcodedMonths[index % 12]; // Cycle through hardcoded months
-                }}
-              />
+                  dataKey="month"
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={8}
+                  interval={31}  // Display one tick per month
+                  tickFormatter={(_value, index) => {
+                    const hardcodedMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                    return hardcodedMonths[index % 12];
+                  }}
+                />
                 <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
                 <Line
                   dataKey="Actual"
@@ -160,33 +158,33 @@ const PrecipLR = () => {
           </ChartContainer>
         </CardContent>
         <CardFooter className="text-sm sm:text-base md:text-lg lg:text-xl">
-          <div className="grid gap-2">
-            <div className="flex items-center gap-2 text-slate-500 leading-none">
-              Showing <b>precipitation</b> predictions for the Year <span className='font-bold'>2023</span>
-            </div>
-          </div>
-        </CardFooter>
+  <div className="flex items-center gap-2 text-slate-500 leading-none">
+    Showing <span className='font-medium'>precipitation</span> predictions for the Year <strong>2023</strong>
+  </div>
+</CardFooter>
+
       </Card>
 
       {/* Right side: Description and Performance Metrics */}
-      <div className="grid grid-rows-2 gap-4">
-        
+      <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-1 md:gap-6 md:mt-0">
+
         {/* Upper half: Description */}
         <motion.div
-          className="text-lg sm:text-xl md:text-2xl text-justify"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl text-justify"
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
           Since <span className='text-blue-800 font-bold'>Precipitation</span> typically exhibits{" "}
           <span className="font-bold text-red-400">High Variance</span>,{" "}
-          <span className="font-bold text-blue-400">Linear Regression </span>is <strong>NOT</strong> the most suitable for predicting Precipitation trends.<br/> <p className='mt-2 text-violet-400 font-semibold'>However, it can still provide valuable insights at less variance datapoints.</p>
+          <span className="font-bold text-blue-400">Linear Regression </span>is <strong>NOT</strong> the most suitable for predicting Precipitation trends.
+          <p className='mt-2 text-violet-400 font-semibold'>However, it can still provide valuable insights at less variance datapoints.</p>
         </motion.div>
 
         {/* Lower half: Performance Metrics */}
         {performanceData && (
           <motion.div
-            className="mt-20"
+            className="mt-4"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.8, duration: 0.5 }}
@@ -200,16 +198,16 @@ const PrecipLR = () => {
               </TableHeader>
               <TableBody>
                 <TableRow>
-                  <TableCell className='text-2xl font-bold'>Variance</TableCell>
-                  <TableCell className='text-xl font-bold tracking-wider'>{performanceData.variance}</TableCell>
+                  <TableCell className='text-lg md:text-2xl font-bold'>Variance</TableCell>
+                  <TableCell className='text-base md:text-xl font-bold tracking-wider'>{performanceData.variance}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className='text-2xl font-bold'>Mean Absolute Error</TableCell>
-                  <TableCell className='text-xl font-bold tracking-wider'>{performanceData.Performance_measures.mean_absolute_error}</TableCell>
+                  <TableCell className='text-lg md:text-2xl font-bold'>Mean Absolute Error</TableCell>
+                  <TableCell className='text-base md:text-xl font-bold tracking-wider'>{performanceData.Performance_measures.mean_absolute_error}</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell className='text-2xl font-bold'>R² Score</TableCell>
-                  <TableCell className='text-xl font-bold tracking-wider'>{performanceData.Performance_measures.r2_score}</TableCell>
+                  <TableCell className='text-lg md:text-2xl font-bold'>R² Score</TableCell>
+                  <TableCell className='text-base md:text-xl font-bold tracking-wider'>{performanceData.Performance_measures.r2_score}</TableCell>
                 </TableRow>
               </TableBody>
             </Table>

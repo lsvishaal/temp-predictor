@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { CartesianGrid, Line, LineChart, XAxis } from 'recharts';
+import { CartesianGrid, Line, LineChart, XAxis, ResponsiveContainer } from 'recharts';
 import { motion } from 'framer-motion';
 import {
   Card,
@@ -103,10 +103,10 @@ const TempRF = () => {
   }
 
   return (
-    <div className="grid grid-cols-[70%_30%] gap-4  max-w-full p-1 sm:p-2 md:p-4 lg:p-6">
+    <div className="grid grid-cols-1 md:grid-cols-[70%_30%] gap-4 mx-1 max-w-full p-2 sm:p-4 md:p-6">
       
       {/* Left side: Graph */}
-      <Card className="w-full">
+      <Card className="w-full drop-shadow-2xl">
         <CardHeader>
           <CardTitle className="text-lg sm:text-xl md:text-2xl lg:text-3xl">
             <span className='text-red-400'>Temperature</span> in <span className='text-green-400'>Random Forest</span>
@@ -117,63 +117,56 @@ const TempRF = () => {
         </CardHeader>
         <CardContent>
           <ChartContainer config={chartConfig} className="w-full h-64 sm:h-80 md:h-96 lg:h-[30rem]">
-            <LineChart
-              accessibilityLayer
-              data={chartData}
-              margin={{
-                left: 12,
-                right: 12,
-              }}
-              className="w-full h-full"
-            >
-              <CartesianGrid vertical={false} />
-              <XAxis
-                dataKey="month" // Assuming 'month' contains the date data
-                tickLine={false}
-                axisLine={false}
-                tickMargin={8}
-                interval={31}  // Display one tick per month
-                tickFormatter={(_value, index) => {
-                  const hardcodedMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                  return hardcodedMonths[index % 12]; // Cycle through hardcoded months
-                }}
-              />
-              <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-              <Line
-                dataKey="Actual"
-                type="monotone"
-                stroke="var(--color-Actual)"
-                strokeWidth={2}
-                dot={false}
-              />
-              <Line
-                dataKey="Prediction"
-                type="monotone"
-                stroke="var(--color-Prediction)"
-                strokeWidth={2}
-                dot={false}
-              />
-            </LineChart>
+            <ResponsiveContainer width="100%" height="100%">
+              <LineChart
+                data={chartData}
+                margin={{ left: 12, right: 12 }}
+                className="w-full h-full"
+              >
+                <CartesianGrid vertical={false} />
+                <XAxis
+                  dataKey="month" // Assuming 'month' contains the date data
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={8}
+                  interval={31}  // Display one tick per month
+                  tickFormatter={(_value, index) => {
+                    const hardcodedMonths = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                    return hardcodedMonths[index % 12]; // Cycle through hardcoded months
+                  }}
+                />
+                <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+                <Line
+                  dataKey="Actual"
+                  type="monotone"
+                  stroke="var(--color-Actual)"
+                  strokeWidth={2}
+                  dot={false}
+                />
+                <Line
+                  dataKey="Prediction"
+                  type="monotone"
+                  stroke="var(--color-Prediction)"
+                  strokeWidth={2}
+                  dot={false}
+                />
+              </LineChart>
+            </ResponsiveContainer>
           </ChartContainer>
         </CardContent>
         <CardFooter className="text-sm sm:text-base md:text-lg lg:text-xl">
-          <div className="flex w-full items-start gap-2">
-            <div className="grid gap-2">
-              
-              <div className="flex items-center gap-2 leading-none text-muted-foreground">
-              Showing temperature predictions for the Year <span className='font-bold font'>2023</span>
-              </div>
-            </div>
+          <div className="flex items-center gap-2 text-slate-500 leading-none">
+            Showing temperature predictions for the Year <span className='font-bold'>2023</span>
           </div>
         </CardFooter>
       </Card>
 
       {/* Right side: Description and Performance Metrics */}
-      <div className="grid grid-rows-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-1 md:gap-6 md:mt-0">
         
         {/* Upper half: Description */}
         <motion.div
-          className="text-lg sm:text-xl md:text-2xl text-justify"
+          className="text-base sm:text-lg md:text-xl lg:text-2xl text-justify"
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
@@ -185,7 +178,7 @@ const TempRF = () => {
         {/* Lower half: Performance Metrics */}
         {performanceData && (
           <motion.div
-            className="mt-20"
+            className="mt-4"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.8, duration: 0.5 }}
@@ -199,18 +192,18 @@ const TempRF = () => {
               </TableHeader>
               <TableBody>
                 <TableRow>
-                  <TableCell className='text-2xl font-bold'>Variance</TableCell>
-                  <TableCell className='text-xl font-bold tracking-wider'>{performanceData.variance}</TableCell>
+                  <TableCell className='text-lg md:text-2xl font-bold'>Variance</TableCell>
+                  <TableCell className='text-base md:text-xl font-bold tracking-wider'>{performanceData.variance}</TableCell>
                 </TableRow>
                 {performanceData.Performance_measures && (
                   <>
                     <TableRow>
-                      <TableCell className='text-2xl font-bold'>Mean Absolute Error</TableCell>
-                      <TableCell className='text-xl font-bold tracking-wider'>{performanceData.Performance_measures.mean_absolute_error}</TableCell>
+                      <TableCell className='text-lg md:text-2xl font-bold'>Mean Absolute Error</TableCell>
+                      <TableCell className='text-base md:text-xl font-bold tracking-wider'>{performanceData.Performance_measures.mean_absolute_error}</TableCell>
                     </TableRow>
                     <TableRow>
-                      <TableCell className='text-2xl font-bold'>R² Score</TableCell>
-                      <TableCell className='text-xl font-bold tracking-wider'>{performanceData.Performance_measures.r2_score}</TableCell>
+                      <TableCell className='text-lg md:text-2xl font-bold'>R² Score</TableCell>
+                      <TableCell className='text-base md:text-xl font-bold tracking-wider'>{performanceData.Performance_measures.r2_score}</TableCell>
                     </TableRow>
                   </>
                 )}
